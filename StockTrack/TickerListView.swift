@@ -7,13 +7,18 @@
 
 import UIKit
 
-class TickerListView: UIViewController {
+class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    var tickerModel: TickerManager?
 
     override func viewDidLoad() {
+        
+        
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    }
+    
+    
+    @IBAction func addTicker(_ sender: Any) {
     }
     
     @IBAction func refresh(_ sender: Any) {

@@ -28,7 +28,7 @@
                                     <navigationItem id="LM2-a1-pCe">
                                         <barButtonItem key="rightBarButtonItem" title="Item" systemItem="add" id="LDC-uf-gnT">
                                             <connections>
-                                                <action selector="addTicker:" destination="3e8-5r-Qh6" id="JaT-YH-SDt"/>
+                                                <action selector="addTicker:" destination="3e8-5r-Qh6" id="5V2-k3-5BU"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -51,7 +51,7 @@
                                                     <rect key="frame" x="14" y="4" width="354" height="81"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mBr-jL-vvN">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="TSLA" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mBr-jL-vvN">
                                                     <rect key="frame" x="24" y="14" width="115" height="58"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="32"/>
