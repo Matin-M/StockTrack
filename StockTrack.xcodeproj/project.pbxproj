@@ -9,23 +9,34 @@
 /* Begin PBXBuildFile section */
 		9E0929BD2581CFCB005004A0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0929BC2581CFCB005004A0 /* AppDelegate.swift */; };
 		9E0929BF2581CFCB005004A0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0929BE2581CFCB005004A0 /* SceneDelegate.swift */; };
-		9E0929C12581CFCB005004A0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0929C02581CFCB005004A0 /* ViewController.swift */; };
 		9E0929C42581CFCB005004A0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E0929C22581CFCB005004A0 /* Main.storyboard */; };
 		9E0929C72581CFCB005004A0 /* StockTrack.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9E0929C52581CFCB005004A0 /* StockTrack.xcdatamodeld */; };
 		9E0929C92581CFCE005004A0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E0929C82581CFCE005004A0 /* Assets.xcassets */; };
 		9E0929CC2581CFCE005004A0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E0929CA2581CFCE005004A0 /* LaunchScreen.storyboard */; };
+		9E0929D52581CFEE005004A0 /* TickerDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0929D42581CFEE005004A0 /* TickerDetailView.swift */; };
+		9E0929D92581D39E005004A0 /* TickerListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0929D82581D39E005004A0 /* TickerListView.swift */; };
+		9E0929DD2581D6C5005004A0 /* TickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0929DC2581D6C5005004A0 /* TickerCell.swift */; };
+		9EF3BDFC2581DA830074A217 /* TickerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF3BDFB2581DA830074A217 /* TickerManager.swift */; };
+		9EF3BDFF2581DA9C0074A217 /* Ticker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF3BDFE2581DA9C0074A217 /* Ticker.swift */; };
+		9EF3BE042581DB2C0074A217 /* CellBorder.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EF3BE032581DB2C0074A217 /* CellBorder.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		9E0929B92581CFCB005004A0 /* StockTrack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StockTrack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E0929BC2581CFCB005004A0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9E0929BE2581CFCB005004A0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		9E0929C02581CFCB005004A0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		9E0929C32581CFCB005004A0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9E0929C62581CFCB005004A0 /* StockTrack.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = StockTrack.xcdatamodel; sourceTree = "<group>"; };
 		9E0929C82581CFCE005004A0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9E0929CB2581CFCE005004A0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9E0929CD2581CFCE005004A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9E0929D42581CFEE005004A0 /* TickerDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerDetailView.swift; sourceTree = "<group>"; };
+		9E0929D82581D39E005004A0 /* TickerListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerListView.swift; sourceTree = "<group>"; };
+		9E0929DC2581D6C5005004A0 /* TickerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerCell.swift; sourceTree = "<group>"; };
+		9EF3BDFB2581DA830074A217 /* TickerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerManager.swift; sourceTree = "<group>"; };
+		9EF3BDFE2581DA9C0074A217 /* Ticker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ticker.swift; sourceTree = "<group>"; };
+		9EF3BE022581DAA40074A217 /* StockTrack.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = StockTrack.xcdatamodel; sourceTree = "<group>"; };
+		9EF3BE032581DB2C0074A217 /* CellBorder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = CellBorder.png; path = ../../CellBorder.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,6 +53,8 @@
 		9E0929B02581CFCB005004A0 = {
 			isa = PBXGroup;
 			children = (
+				9E0929E02581D7A5005004A0 /* CoreData */,
+				9E0929DF2581D79F005004A0 /* Images */,
 				9E0929BB2581CFCB005004A0 /* StockTrack */,
 				9E0929BA2581CFCB005004A0 /* Products */,
 			);
@@ -60,14 +73,34 @@
 			children = (
 				9E0929BC2581CFCB005004A0 /* AppDelegate.swift */,
 				9E0929BE2581CFCB005004A0 /* SceneDelegate.swift */,
-				9E0929C02581CFCB005004A0 /* ViewController.swift */,
+				9E0929D82581D39E005004A0 /* TickerListView.swift */,
 				9E0929C22581CFCB005004A0 /* Main.storyboard */,
 				9E0929C82581CFCE005004A0 /* Assets.xcassets */,
 				9E0929CA2581CFCE005004A0 /* LaunchScreen.storyboard */,
 				9E0929CD2581CFCE005004A0 /* Info.plist */,
 				9E0929C52581CFCB005004A0 /* StockTrack.xcdatamodeld */,
+				9E0929D42581CFEE005004A0 /* TickerDetailView.swift */,
+				9E0929DC2581D6C5005004A0 /* TickerCell.swift */,
 			);
 			path = StockTrack;
+			sourceTree = "<group>";
+		};
+		9E0929DF2581D79F005004A0 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				9EF3BE032581DB2C0074A217 /* CellBorder.png */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		9E0929E02581D7A5005004A0 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				9EF3BDFB2581DA830074A217 /* TickerManager.swift */,
+				9EF3BDFE2581DA9C0074A217 /* Ticker.swift */,
+				9EF3BE012581DAA40074A217 /* StockTrack.xcdatamodeld */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -130,6 +163,7 @@
 				9E0929CC2581CFCE005004A0 /* LaunchScreen.storyboard in Resources */,
 				9E0929C92581CFCE005004A0 /* Assets.xcassets in Resources */,
 				9E0929C42581CFCB005004A0 /* Main.storyboard in Resources */,
+				9EF3BE042581DB2C0074A217 /* CellBorder.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -140,10 +174,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E0929D92581D39E005004A0 /* TickerListView.swift in Sources */,
+				9EF3BDFF2581DA9C0074A217 /* Ticker.swift in Sources */,
 				9E0929C72581CFCB005004A0 /* StockTrack.xcdatamodeld in Sources */,
-				9E0929C12581CFCB005004A0 /* ViewController.swift in Sources */,
+				9E0929D52581CFEE005004A0 /* TickerDetailView.swift in Sources */,
 				9E0929BD2581CFCB005004A0 /* AppDelegate.swift in Sources */,
 				9E0929BF2581CFCB005004A0 /* SceneDelegate.swift in Sources */,
+				9EF3BDFC2581DA830074A217 /* TickerManager.swift in Sources */,
+				9E0929DD2581D6C5005004A0 /* TickerCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -353,6 +391,16 @@
 				9E0929C62581CFCB005004A0 /* StockTrack.xcdatamodel */,
 			);
 			currentVersion = 9E0929C62581CFCB005004A0 /* StockTrack.xcdatamodel */;
+			path = StockTrack.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+		9EF3BE012581DAA40074A217 /* StockTrack.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				9EF3BE022581DAA40074A217 /* StockTrack.xcdatamodel */,
+			);
+			currentVersion = 9EF3BE022581DAA40074A217 /* StockTrack.xcdatamodel */;
 			path = StockTrack.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
