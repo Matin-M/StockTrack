@@ -14,13 +14,14 @@ class TickerManager{
     
     let managedObjectContext: NSManagedObjectContext?
     var fetchedResults = [TickerStore]()
+    var fetchRequest: NSFetchRequest<NSFetchRequestResult>?
     
     init(managedObject: NSManagedObjectContext){
         
         self.managedObjectContext = managedObject
         //Fetch saved tickers from persistant storage.
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "TickerStore")
-        fetchedResults = ((try? managedObjectContext!.fetch(fetchRequest)) as? [TickerStore])!
+        fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "TickerStore")
+        fetchedResults = ((try? managedObjectContext!.fetch(fetchRequest!)) as? [TickerStore])!
         
         //Clear local tickerList
         tickerList.removeAll()
@@ -43,8 +44,13 @@ class TickerManager{
     }
     
     func removeTickerObject(item:Int) {
+        //Update local fetchedResults array to enable deletion.
+        fetchedResults = ((try? managedObjectContext!.fetch(fetchRequest!)) as? [TickerStore])!
         
+        //Remove local element.
         tickerList.remove(at: item)
+        
+        //Remove from CoreData database.
         managedObjectContext!.delete(fetchedResults[item])
         fetchedResults.remove(at: item)
         
@@ -61,7 +67,7 @@ class TickerManager{
         let newTicker = TickerLocal(tickerName: tickerStr)
         tickerList.append(newTicker)
         
-        // get a handler to the Contacts entity through the managed object context
+        //Ticker Entity
         let ent = NSEntityDescription.entity(forEntityName: "TickerStore", in: self.managedObjectContext!)
         
         // create a contact object instance for insert

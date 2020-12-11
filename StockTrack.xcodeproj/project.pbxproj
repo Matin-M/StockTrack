@@ -52,6 +52,7 @@
 		9E0929B02581CFCB005004A0 = {
 			isa = PBXGroup;
 			children = (
+				9E37AF6F258338E900FB9AEB /* CoreData */,
 				9E0929DF2581D79F005004A0 /* Images */,
 				9E0929BB2581CFCB005004A0 /* StockTrack */,
 				9E0929BA2581CFCB005004A0 /* Products */,
@@ -91,6 +92,13 @@
 				9EF3BE032581DB2C0074A217 /* CellBorder.png */,
 			);
 			path = Images;
+			sourceTree = "<group>";
+		};
+		9E37AF6F258338E900FB9AEB /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
