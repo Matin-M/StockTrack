@@ -9,8 +9,9 @@ import UIKit
 
 class TickerCell: UITableViewCell {
     
+    
     @IBOutlet weak var tickerLabel: UILabel!
-    @IBOutlet weak var percentChangeLabel: UILabel!
+    @IBOutlet weak var percentChange: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

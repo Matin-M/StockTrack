@@ -12,20 +12,24 @@ class TickerManager{
     
     var tickerList: [TickerLocal] = []
     
-    var insertContext: NSManagedObjectContext?
-    var viewContext: NSManagedObjectContext?
-    var fetchedResults = [Ticker]()
+    let managedObjectContext: NSManagedObjectContext?
+    var fetchedResults = [TickerStore]()
     
-    init(insertContext: NSManagedObjectContext, viewContext: NSManagedObjectContext){
-        self.insertContext = insertContext
-        self.viewContext = viewContext
+    init(managedObject: NSManagedObjectContext){
         
+        self.managedObjectContext = managedObject
         //Fetch saved tickers from persistant storage.
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Ticker")
-        fetchedResults = ((try? insertContext.fetch(fetchRequest)) as? [Ticker])!
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "TickerStore")
+        fetchedResults = ((try? managedObjectContext!.fetch(fetchRequest)) as? [TickerStore])!
         
         //Clear local tickerList
         tickerList.removeAll()
+        
+        for ticker in fetchedResults{
+            if let tickerString = ticker.tickerStr{
+                tickerList.append(TickerLocal(tickerName: tickerString))
+            }
+        }
     }
     
     func getCount() -> Int
@@ -38,37 +42,37 @@ class TickerManager{
         return tickerList[item]
     }
     
-    func removeCityObject(item:Int) {
+    func removeTickerObject(item:Int) {
         
         tickerList.remove(at: item)
-        insertContext!.delete(fetchedResults[item])
+        managedObjectContext!.delete(fetchedResults[item])
         fetchedResults.remove(at: item)
         
         do{
-            try insertContext!.save()
+            try managedObjectContext!.save()
         }catch {
             print("Error in deletion!")
         }
         
     }
     
-    func addCityObject(tickerStr: String) -> TickerLocal{
+    func addTickerObject(tickerStr: String) -> TickerLocal{
         //Append a new local ticker object.
         let newTicker = TickerLocal(tickerName: tickerStr)
         tickerList.append(newTicker)
         
         // get a handler to the Contacts entity through the managed object context
-        let ent = NSEntityDescription.entity(forEntityName: "City", in: self.insertContext!)
+        let ent = NSEntityDescription.entity(forEntityName: "TickerStore", in: self.managedObjectContext!)
         
         // create a contact object instance for insert
-        let newTickerSave = Ticker(entity: ent!, insertInto: insertContext)
+        let newTickerSave = TickerStore(entity: ent!, insertInto: self.managedObjectContext)
         
         // add data to each field in the entity
         newTickerSave.tickerStr = tickerStr
         
         //save the new entity
         do {
-            try insertContext!.save()
+            try self.managedObjectContext!.save()
             print("Ticker Saved!")
             
         } catch let error {
