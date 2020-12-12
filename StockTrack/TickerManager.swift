@@ -9,9 +9,10 @@ import Foundation
 import CoreData
 
 class TickerManager{
-    
+    //Local TickerList used for generating table.
     var tickerList: [TickerLocal] = []
     
+    //Persistant storage objects.
     let managedObjectContext: NSManagedObjectContext?
     var fetchedResults = [TickerStore]()
     var fetchRequest: NSFetchRequest<NSFetchRequestResult>?
@@ -26,6 +27,7 @@ class TickerManager{
         //Clear local tickerList
         tickerList.removeAll()
         
+        //Populate fetchedResults with stored Tickers.
         for ticker in fetchedResults{
             if let tickerString = ticker.tickerStr{
                 tickerList.append(TickerLocal(tickerName: tickerString))

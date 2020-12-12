@@ -29,7 +29,7 @@ class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.tickerTable.separatorStyle = UITableViewCell.SeparatorStyle.none
         
         //Set color of tableView.
-        self.tickerTable.backgroundColor = UIColor.white
+        self.tickerTable.backgroundColor = UIColor.gray
         
         //Set tableview row height.
         self.tickerTable.rowHeight = 90.0
@@ -65,10 +65,8 @@ class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath)
     {
-      // delete the data from the city table,  Do this first, then use method 1 or method 2
         tickerModel!.removeTickerObject(item: indexPath.row)
-        
-        //Method 1
+
         self.tickerTable.beginUpdates()
         self.tickerTable.deleteRows(at: [indexPath], with: .automatic)
         self.tickerTable.endUpdates()
