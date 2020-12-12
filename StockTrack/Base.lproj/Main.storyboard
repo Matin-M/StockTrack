@@ -53,6 +53,7 @@
                                         <connections>
                                             <outlet property="percentChange" destination="R6S-vj-yB7" id="8Tq-sM-saF"/>
                                             <outlet property="tickerLabel" destination="CXW-xD-4Ut" id="VcB-zq-acy"/>
+                                            <segue destination="ejR-N4-nvA" kind="show" identifier="detailSegue" id="b4W-AK-to3"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -68,6 +69,9 @@
                                 <state key="normal" title="News" image="book.fill" catalog="system">
                                     <color key="titleColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <segue destination="59U-d3-MRs" kind="show" id="Qys-YQ-xDm"/>
+                                </connections>
                             </button>
                             <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LZ1-8N-6Pb">
                                 <rect key="frame" x="0.0" y="5" width="414" height="44"/>
@@ -122,61 +126,92 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NCt-Ok-5wR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="81.159420289855078" y="-392.11956521739131"/>
+            <point key="canvasLocation" x="19" y="-325"/>
         </scene>
         <!--Ticker Detail View-->
-        <scene sceneID="GEU-xK-hzd">
+        <scene sceneID="Nay-xH-Hdd">
             <objects>
-                <viewController id="rxt-wI-yhA" customClass="TickerDetailView" customModule="StockTrack" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="KcY-5v-OQV">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                <viewController id="ejR-N4-nvA" customClass="TickerDetailView" customModule="StockTrack" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="mFp-uc-Nru">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="716"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4qr-bI-7VP">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vwB-WG-R5e">
+                                <rect key="frame" x="0.0" y="11" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            </navigationBar>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CEs-Ql-uur">
-                                <rect key="frame" x="0.0" y="13" width="414" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.30588235289999999" green="0.30588235289999999" blue="0.30588235289999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <color key="barTintColor" red="0.30588235289999999" green="0.30588235289999999" blue="0.30588235289999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </textAttributes>
                                 <items>
-                                    <navigationItem id="uSA-UK-aST">
-                                        <barButtonItem key="leftBarButtonItem" title="Back" image="arrow.backward.square" catalog="system" id="0cr-lO-316"/>
-                                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="YcF-Uf-nEi">
+                                    <navigationItem id="iYO-BV-qDb">
+                                        <barButtonItem key="leftBarButtonItem" title="Back" image="arrowshape.turn.up.backward" catalog="system" id="P6s-8p-HZ3">
                                             <connections>
-                                                <action selector="refresh:" destination="rxt-wI-yhA" id="612-vk-pjs"/>
+                                                <action selector="returnSegue:" destination="ejR-N4-nvA" id="aL4-d2-ncu"/>
+                                                <segue destination="xFM-yb-Dit" kind="unwind" unwindAction="returnFromDetailViewWithUnwindSegue:" id="wfe-Oj-yAD"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="PR7-95-C55">
+                                            <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <connections>
+                                                <action selector="refresh:" destination="ejR-N4-nvA" id="qAp-SS-kqS"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Symbol" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SGO-p6-2hp">
-                                <rect key="frame" x="165" y="28" width="85" height="29"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="ivt-ht-Mka"/>
+                        <viewLayoutGuide key="safeArea" id="yjR-tB-fOR"/>
                         <color key="backgroundColor" red="0.30588235289999999" green="0.30588235289999999" blue="0.30588235289999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
-                    <navigationItem key="navigationItem" id="osh-Ah-a0S"/>
+                    <navigationItem key="navigationItem" id="b4r-DA-IUz"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2dk-uM-jgg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="xFM-yb-Dit" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="819" y="-649"/>
+        </scene>
+        <!--News View-->
+        <scene sceneID="02v-L1-cTL">
+            <objects>
+                <viewController id="59U-d3-MRs" customClass="NewsView" customModule="StockTrack" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="bNb-h1-yjL">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="716"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dXg-5o-o6h">
+                                <rect key="frame" x="0.0" y="62" width="414" height="654"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="n2V-Sg-Hq8"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="dXg-5o-o6h" firstAttribute="trailing" secondItem="n2V-Sg-Hq8" secondAttribute="trailing" id="hjr-au-NaN"/>
+                            <constraint firstItem="dXg-5o-o6h" firstAttribute="leading" secondItem="n2V-Sg-Hq8" secondAttribute="leading" id="qme-D7-56L"/>
+                            <constraint firstItem="dXg-5o-o6h" firstAttribute="bottom" secondItem="n2V-Sg-Hq8" secondAttribute="bottom" id="wWs-E4-cZv"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="OSf-vS-RvK"/>
                     <connections>
-                        <outlet property="tickerStr" destination="SGO-p6-2hp" id="raO-qf-cAx"/>
+                        <outlet property="webView" destination="dXg-5o-o6h" id="d6N-4n-ukV"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="GR5-3X-ujy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eme-1y-Zj7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="809" y="-392"/>
+            <point key="canvasLocation" x="818.84057971014499" y="41.576086956521742"/>
         </scene>
     </scenes>
     <resources>
         <image name="RoundedBorder.png" width="512" height="512"/>
-        <image name="arrow.backward.square" catalog="system" width="128" height="114"/>
         <image name="arrow.clockwise" catalog="system" width="115" height="128"/>
+        <image name="arrowshape.turn.up.backward" catalog="system" width="128" height="106"/>
         <image name="book.fill" catalog="system" width="128" height="102"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

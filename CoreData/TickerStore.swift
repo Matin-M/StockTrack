@@ -17,5 +17,4 @@ public class TickerStore: NSManagedObject{
     //Ticker string
     @NSManaged var tickerStr: String?
     
-    
 }

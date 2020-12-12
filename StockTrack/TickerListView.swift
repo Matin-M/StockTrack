@@ -49,7 +49,7 @@ class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSour
         let ticker = tickerModel!.getTickerObject(item:indexPath.row)
         
         cell.tickerLabel.text = ticker.tickerStr
-        
+        cell.tickerObject = ticker
 
         return cell
     }
@@ -72,6 +72,7 @@ class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.tickerTable.endUpdates()
     }
     
+    //Under development.
     @IBAction func addTicker(_ sender: Any) {
         tickerModel!.addTickerObject(tickerStr: "MSFT")
         tickerModel!.addTickerObject(tickerStr: "TSLA")
@@ -79,5 +80,11 @@ class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         tickerTable.reloadData()
     }
+    
+    //Unwind segue.
+    @IBAction func returnFromDetailView(unwindSegue: UIStoryboardSegue){
+        print("Returned from detailView!")
+    }
+    
     
 }

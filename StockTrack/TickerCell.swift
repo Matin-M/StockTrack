@@ -9,6 +9,7 @@ import UIKit
 
 class TickerCell: UITableViewCell {
     
+    var tickerObject: TickerLocal?
     
     @IBOutlet weak var tickerLabel: UILabel!
     @IBOutlet weak var percentChange: UILabel!
@@ -20,8 +21,7 @@ class TickerCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+        
     }
 
 }
