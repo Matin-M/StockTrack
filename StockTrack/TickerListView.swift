@@ -75,16 +75,19 @@ class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSour
     //Adds a ticker.
     @IBAction func addTicker(_ sender: Any) {
         
+        //Create Alertcontroller object.
         let alertController = UIAlertController(title: "Add a stock to your watchlist", message: "", preferredStyle: .alert)
             alertController.addTextField { (textField : UITextField!) -> Void in
                 textField.placeholder = "Enter Ticker Symbol (i.e. TSLA)"
             }
+        //Add alert action.
         let addAction = UIAlertAction(title: "Add", style: .default, handler: { [self] alert -> Void in
                 let firstTextField = alertController.textFields![0] as UITextField
                 //Add ticker object w/ textfield str.
                 tickerModel!.addTickerObject(tickerStr: firstTextField.text!)
                 tickerTable.reloadData()
             })
+        //Add alert action.
         let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: { (action : UIAlertAction!) -> Void in })
 
             alertController.addAction(addAction)

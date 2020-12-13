@@ -16,7 +16,7 @@ class NewsView: UIViewController, WKNavigationDelegate {
         super.viewDidLoad()
         
         webView?.navigationDelegate = self
-        if let url = URL(string: "https://google.com") {
+        if let url = URL(string: "https://https://finance.yahoo.com/news/") {
             let request = URLRequest(url: url)
             webView.load(request)
         }
