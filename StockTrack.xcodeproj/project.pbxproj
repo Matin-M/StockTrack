@@ -14,6 +14,7 @@
 		9E0929CC2581CFCE005004A0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E0929CA2581CFCE005004A0 /* LaunchScreen.storyboard */; };
 		9E0929D92581D39E005004A0 /* TickerListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0929D82581D39E005004A0 /* TickerListView.swift */; };
 		9E0929DD2581D6C5005004A0 /* TickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0929DC2581D6C5005004A0 /* TickerCell.swift */; };
+		9E210D052585ACE300040B6D /* FetchFinancialData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E210D042585ACE300040B6D /* FetchFinancialData.swift */; };
 		9E37AF5D2582D76200FB9AEB /* TickerCoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9E37AF5B2582D76200FB9AEB /* TickerCoreData.xcdatamodeld */; };
 		9E37AF6B2583156E00FB9AEB /* TickerStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E37AF6A2583156E00FB9AEB /* TickerStore.swift */; };
 		9E37AF7625834D1800FB9AEB /* RoundedBorder.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E37AF7525834D1800FB9AEB /* RoundedBorder.png */; };
@@ -33,6 +34,7 @@
 		9E0929CD2581CFCE005004A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9E0929D82581D39E005004A0 /* TickerListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerListView.swift; sourceTree = "<group>"; };
 		9E0929DC2581D6C5005004A0 /* TickerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerCell.swift; sourceTree = "<group>"; };
+		9E210D042585ACE300040B6D /* FetchFinancialData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchFinancialData.swift; sourceTree = "<group>"; };
 		9E37AF5C2582D76200FB9AEB /* TickerCoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TickerCoreData.xcdatamodel; sourceTree = "<group>"; };
 		9E37AF6A2583156E00FB9AEB /* TickerStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerStore.swift; sourceTree = "<group>"; };
 		9E37AF7525834D1800FB9AEB /* RoundedBorder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RoundedBorder.png; sourceTree = "<group>"; };
@@ -56,6 +58,7 @@
 		9E0929B02581CFCB005004A0 = {
 			isa = PBXGroup;
 			children = (
+				9E210D032585ACAD00040B6D /* API */,
 				9E37AF6F258338E900FB9AEB /* CoreData */,
 				9E0929DF2581D79F005004A0 /* Images */,
 				9E0929BB2581CFCB005004A0 /* StockTrack */,
@@ -94,6 +97,14 @@
 				9E37AF7525834D1800FB9AEB /* RoundedBorder.png */,
 			);
 			path = Images;
+			sourceTree = "<group>";
+		};
+		9E210D032585ACAD00040B6D /* API */ = {
+			isa = PBXGroup;
+			children = (
+				9E210D042585ACE300040B6D /* FetchFinancialData.swift */,
+			);
+			path = API;
 			sourceTree = "<group>";
 		};
 		9E37AF6F258338E900FB9AEB /* CoreData */ = {
@@ -181,6 +192,7 @@
 				9E0929D92581D39E005004A0 /* TickerListView.swift in Sources */,
 				9EF3BE092581E3720074A217 /* TickerLocal.swift in Sources */,
 				9E37AF5D2582D76200FB9AEB /* TickerCoreData.xcdatamodeld in Sources */,
+				9E210D052585ACE300040B6D /* FetchFinancialData.swift in Sources */,
 				9E37AF7B2584958800FB9AEB /* NewsView.swift in Sources */,
 				9E37AF6B2583156E00FB9AEB /* TickerStore.swift in Sources */,
 				9E0929BD2581CFCB005004A0 /* AppDelegate.swift in Sources */,
