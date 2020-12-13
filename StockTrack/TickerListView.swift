@@ -72,18 +72,38 @@ class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.tickerTable.endUpdates()
     }
     
-    //Under development.
+    //Adds a ticker.
     @IBAction func addTicker(_ sender: Any) {
-        tickerModel!.addTickerObject(tickerStr: "MSFT")
-        tickerModel!.addTickerObject(tickerStr: "TSLA")
-        print(tickerModel?.getCount())
         
-        tickerTable.reloadData()
+        let alertController = UIAlertController(title: "Add a stock to your watchlist", message: "", preferredStyle: .alert)
+            alertController.addTextField { (textField : UITextField!) -> Void in
+                textField.placeholder = "Enter Ticker Symbol (i.e. TSLA)"
+            }
+        let addAction = UIAlertAction(title: "Add", style: .default, handler: { [self] alert -> Void in
+                let firstTextField = alertController.textFields![0] as UITextField
+                //Add ticker object w/ textfield str.
+                tickerModel!.addTickerObject(tickerStr: firstTextField.text!)
+                tickerTable.reloadData()
+            })
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: { (action : UIAlertAction!) -> Void in })
+
+            alertController.addAction(addAction)
+            alertController.addAction(cancelAction)
+            
+        self.present(alertController, animated: true, completion: nil)
+        
+        print(tickerModel?.getCount())
+
     }
     
     //Unwind segue.
     @IBAction func returnFromDetailView(unwindSegue: UIStoryboardSegue){
         print("Returned from detailView!")
+    }
+    
+    //Unwind segue.
+    @IBAction func returnFromNewsView(unwindSegue: UIStoryboardSegue){
+        print("Returned from newsView!")
     }
     
     
