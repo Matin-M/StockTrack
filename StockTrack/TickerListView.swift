@@ -49,7 +49,7 @@ class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSour
         let ticker = tickerModel!.getTickerObject(item:indexPath.row)
         
         cell.tickerLabel.text = ticker.tickerStr
-        cell.tickerObject = ticker
+        cell.percentChange.text = ticker.percentChange
 
         return cell
     }
@@ -84,7 +84,7 @@ class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSour
         let addAction = UIAlertAction(title: "Add", style: .default, handler: { [self] alert -> Void in
                 let firstTextField = alertController.textFields![0] as UITextField
                 //Add ticker object w/ textfield str.
-                tickerModel!.addTickerObject(tickerStr: firstTextField.text!)
+                tickerModel!.addTickerObject(tickerStr: firstTextField.text!, tickerChange: "0.0%")
                 tickerTable.reloadData()
             })
         //Add alert action.
@@ -97,6 +97,19 @@ class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         print(tickerModel?.getCount())
 
+    }
+    
+    
+    @IBAction func refresh(_ sender: Any) {
+        /*
+        print("refreshing!")
+        tickerModel?.tickerList[0].tickerStr = "UPDATED"
+        tickerTable.reloadData()
+         */
+        var fetch = FetchFinacialData(ticker: "TSLA")
+        fetch.fetchStockQuote()
+        print(fetch.getQuoteData(toFind: "regularMarketChangePercent"))
+        
     }
     
     //Unwind segue.

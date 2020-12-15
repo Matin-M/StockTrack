@@ -9,7 +9,7 @@ import UIKit
 
 class TickerCell: UITableViewCell {
     
-    var tickerObject: TickerLocal?
+    var fetchFinancials: FetchFinacialData!
     
     @IBOutlet weak var tickerLabel: UILabel!
     @IBOutlet weak var percentChange: UILabel!

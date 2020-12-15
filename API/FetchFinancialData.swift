@@ -9,34 +9,69 @@ import Foundation
 
 class FetchFinacialData{
     
-    var retrievedJSON: Any?
-    var API_KEY: String = "d1207125c7msh17c2c423fd6eb41p12ce5ajsna5cdc9a75064"
-    let headers: [String:String]
+    //Class vars.
+    var retrievedData: String?
+    let API_KEY: String = "d1207125c7msh17c2c423fd6eb41p12ce5ajsna5cdc9a75064"
+    var headers: [String:String]
+    var ticker: String?
     
-    init(){
+    //Init using ticker symbol.
+    init(ticker: String){
+        self.ticker = ticker
         headers = [
             "x-rapidapi-key": API_KEY,
             "x-rapidapi-host": "yahoo-finance-low-latency.p.rapidapi.com"]
     }
     
-    func getRetrievedJSON() -> Any? { return retrievedJSON }
+    func getRetrievedJSON() -> String { return retrievedData! }
     
-    func fetchStockQuote(ticker: String) -> Void {
-        let request = NSMutableURLRequest(url: NSURL(string: "https://yahoo-finance-low-latency.p.rapidapi.com/v6/finance/quote?symbols=TSLA")! as URL, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10.0)
+    //Parse JSON data. NOTE: retrievedData is not JSON compliant.
+    func getQuoteData(toFind: String) -> String? {
+        var str = retrievedData!
+        var index: Int = 0
+
+        if let range: Range<String.Index> = str.range(of: toFind) {
+            index = str.distance(from: str.startIndex, to: range.lowerBound)
+            print("index: ", index)
+        }
+        else {
+            return nil
+        }
+
+        var i = index+toFind.count+2
+        var result: String = ""
+
+        while(true){
+            let offset = str.index(str.startIndex, offsetBy: i)
+            if(str[offset] == ","){
+                break
+            }else{
+                result.append(str[offset])
+            }
+            i+=1
+        }
+
+        print(result)
+        
+        return result
+    }
+    
+    func fetchStockQuote() -> Void {
+        let request = NSMutableURLRequest(url: NSURL(string: "https://yahoo-finance-low-latency.p.rapidapi.com/v6/finance/quote?symbols=\(ticker!)")! as URL, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10.0)
         requestData(request: request)
     }
     
-    func fetchStockDetails(ticker: String) -> Void {
-        let request = NSMutableURLRequest(url: NSURL(string: "https://yahoo-finance-low-latency.p.rapidapi.com/v11/finance/quoteSummary/AAPL?modules=defaultKeyStatistics%2CassetProfile%2C%20earningsHistory%2C%20recommendationTrend%2C%20esgScores")! as URL, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10.0)
+    func fetchStockDetails() -> Void {
+        let request = NSMutableURLRequest(url: NSURL(string: "https://yahoo-finance-low-latency.p.rapidapi.com/v11/finance/quoteSummary/\(ticker!)?modules=defaultKeyStatistics%2CassetProfile%2C%20earningsHistory%2C%20recommendationTrend%2C%20esgScores")! as URL, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10.0)
         requestData(request: request)
     }
     
-    
-    func fetchStockChart(ticker: String) -> Void {
-        let request = NSMutableURLRequest(url: NSURL(string: "https://yahoo-finance-low-latency.p.rapidapi.com/v8/finance/chart/AAPL?comparisons=MSFT%2C%5EVIX")! as URL, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10.0)
+    func fetchStockChart() -> Void {
+        let request = NSMutableURLRequest(url: NSURL(string: "https://yahoo-finance-low-latency.p.rapidapi.com/v8/finance/chart/\(ticker!)")! as URL, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10.0)
         requestData(request: request)
     }
     
+    //Make a RESTful API request to yahoo finance.
     func requestData(request: NSMutableURLRequest) -> Void {
 
         request.httpMethod = "GET"
@@ -45,7 +80,7 @@ class FetchFinacialData{
         let session = URLSession.shared
         let sem = DispatchSemaphore(value: 0)
         
-        var jsonData: Any = ""
+        var jsonData: String = " "
         
         let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
             if (error != nil) {
@@ -70,8 +105,11 @@ class FetchFinacialData{
                     return
                 }
                 
-                //Deserialize JSON object
-                jsonData = try? JSONSerialization.jsonObject(with: data!, options: [])
+                //Deserialize JSON object: NOT WORKING
+                //jsonData = try? JSONSerialization.jsonObject(with: data!, options: [])
+                if let data = data, let dataString = String(data: data, encoding: .utf8) {
+                   jsonData = dataString
+                }
             }
             //Signal semaphore.
             sem.signal()
@@ -79,17 +117,17 @@ class FetchFinacialData{
 
         dataTask.resume()
         sem.wait()
-        retrievedJSON = jsonData
+        retrievedData = jsonData
     }
     
     //MARK: - HTTP Request error handlers.
     
     func handleClientError(error: Optional<Any>) -> Void{
-        
+        print("A client error occurred!")
     }
     
     func handleServerError(response: HTTPURLResponse) -> Void{
-        
+        print("A server error occurred!")
     }
     
 }

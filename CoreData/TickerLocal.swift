@@ -13,9 +13,11 @@ import Foundation
 class TickerLocal{
     
     var tickerStr: String?
+    var percentChange: String?
     
-    init(tickerName: String){
+    init(tickerName: String, tickerChange: String){
         tickerStr = tickerName
+        percentChange = tickerChange
     }
     
 }
