@@ -30,7 +30,7 @@ class TickerManager{
         //Populate fetchedResults with stored Tickers.
         for ticker in fetchedResults{
             if let tickerString = ticker.tickerStr{
-                tickerList.append(TickerLocal(tickerName: tickerString, tickerChange: "0.0"))
+                tickerList.append(TickerLocal(tickerName: tickerString, tickerChange: "0.0%", afterHours: "0.0%"))
             }
         }
     }
@@ -64,9 +64,9 @@ class TickerManager{
         
     }
     
-    func addTickerObject(tickerStr: String, tickerChange: String) -> TickerLocal{
+    func addTickerObject(tickerStr: String, tickerChange: String, afterHours: String) -> TickerLocal{
         //Append a new local ticker object.
-        let newTicker = TickerLocal(tickerName: tickerStr, tickerChange: tickerChange)
+        let newTicker = TickerLocal(tickerName: tickerStr, tickerChange: tickerChange, afterHours: afterHours)
         tickerList.append(newTicker)
         
         //Ticker Entity

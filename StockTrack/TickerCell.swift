@@ -13,6 +13,7 @@ class TickerCell: UITableViewCell {
     
     @IBOutlet weak var tickerLabel: UILabel!
     @IBOutlet weak var percentChange: UILabel!
+    @IBOutlet weak var afterHoursChange: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

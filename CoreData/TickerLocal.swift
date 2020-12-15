@@ -14,10 +14,12 @@ class TickerLocal{
     
     var tickerStr: String?
     var percentChange: String?
+    var afterHoursChange: String?
     
-    init(tickerName: String, tickerChange: String){
+    init(tickerName: String, tickerChange: String, afterHours: String){
         tickerStr = tickerName
         percentChange = tickerChange
+        afterHoursChange = afterHours
     }
     
 }

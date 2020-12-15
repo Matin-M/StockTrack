@@ -49,7 +49,27 @@ class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSour
         let ticker = tickerModel!.getTickerObject(item:indexPath.row)
         
         cell.tickerLabel.text = ticker.tickerStr
+        
+        if(ticker.percentChange!.contains("-") == false){
+            cell.percentChange.textColor = UIColor.green
+            cell.percentChange.text = "↑\(ticker.percentChange!)%"
+        }else{
+            cell.percentChange.textColor = UIColor.red
+            cell.percentChange.text = "↓\(ticker.percentChange!)%"
+        }
+        
+        if(ticker.afterHoursChange!.contains("-") == false){
+            cell.afterHoursChange.textColor = UIColor.green
+            cell.afterHoursChange.text = "↑\(ticker.afterHoursChange!)%"
+        }else{
+            cell.afterHoursChange.textColor = UIColor.red
+            cell.afterHoursChange.text = "↓\(ticker.afterHoursChange!)%"
+        }
+        /*
+        
         cell.percentChange.text = ticker.percentChange
+        cell.afterHoursChange.text = ticker.afterHoursChange
+        */
 
         return cell
     }
@@ -84,7 +104,7 @@ class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSour
         let addAction = UIAlertAction(title: "Add", style: .default, handler: { [self] alert -> Void in
                 let firstTextField = alertController.textFields![0] as UITextField
                 //Add ticker object w/ textfield str.
-                tickerModel!.addTickerObject(tickerStr: firstTextField.text!, tickerChange: "0.0%")
+                tickerModel!.addTickerObject(tickerStr: firstTextField.text!, tickerChange: "0.0%", afterHours: "0.0%")
                 tickerTable.reloadData()
             })
         //Add alert action.
@@ -101,15 +121,15 @@ class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     
     @IBAction func refresh(_ sender: Any) {
-        /*
-        print("refreshing!")
-        tickerModel?.tickerList[0].tickerStr = "UPDATED"
+
+        for tickerFromList in tickerModel!.tickerList{
+            let fetch = FetchFinacialData(ticker: tickerFromList.tickerStr!)
+            fetch.fetchStockQuote()
+            print(fetch.getQuoteData(toFind: "regularMarketChangePercent"))
+            tickerFromList.percentChange = fetch.getQuoteData(toFind: "regularMarketChangePercent")
+            tickerFromList.afterHoursChange = fetch.getQuoteData(toFind: "postMarketChangePercent")
+        }
         tickerTable.reloadData()
-         */
-        var fetch = FetchFinacialData(ticker: "TSLA")
-        fetch.fetchStockQuote()
-        print(fetch.getQuoteData(toFind: "regularMarketChangePercent"))
-        
     }
     
     //Unwind segue.
