@@ -11,6 +11,8 @@ class TickerCell: UITableViewCell {
     
     var fetchFinancials: FetchFinacialData!
     
+    @IBOutlet weak var volume: UILabel!
+    @IBOutlet weak var companyName: UILabel!
     @IBOutlet weak var tickerLabel: UILabel!
     @IBOutlet weak var percentChange: UILabel!
     @IBOutlet weak var afterHoursChange: UILabel!

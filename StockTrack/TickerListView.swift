@@ -50,26 +50,29 @@ class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         cell.tickerLabel.text = ticker.tickerStr
         
+        
         if(ticker.percentChange!.contains("-") == false){
             cell.percentChange.textColor = UIColor.green
-            cell.percentChange.text = "↑\(ticker.percentChange!)%"
+            let index = ticker.percentChange!.index(ticker.percentChange!.startIndex, offsetBy: 5)
+            cell.percentChange.text = "↑\(ticker.percentChange![..<index])%"
         }else{
+            let index = ticker.percentChange!.index(ticker.percentChange!.startIndex, offsetBy: 5)
             cell.percentChange.textColor = UIColor.red
-            cell.percentChange.text = "↓\(ticker.percentChange!)%"
+            cell.percentChange.text = "↓\(ticker.percentChange![..<index])%"
         }
         
         if(ticker.afterHoursChange!.contains("-") == false){
+            let index = ticker.afterHoursChange!.index(ticker.afterHoursChange!.startIndex, offsetBy: 5)
             cell.afterHoursChange.textColor = UIColor.green
-            cell.afterHoursChange.text = "↑\(ticker.afterHoursChange!)%"
+            cell.afterHoursChange.text = "↑\(ticker.afterHoursChange![..<index])%"
         }else{
+            let index = ticker.afterHoursChange!.index(ticker.afterHoursChange!.startIndex, offsetBy: 5)
             cell.afterHoursChange.textColor = UIColor.red
-            cell.afterHoursChange.text = "↓\(ticker.afterHoursChange!)%"
+            cell.afterHoursChange.text = "↓\(ticker.afterHoursChange![..<index])%"
         }
-        /*
-        
-        cell.percentChange.text = ticker.percentChange
-        cell.afterHoursChange.text = ticker.afterHoursChange
-        */
+
+        cell.companyName.text = ticker.companyName
+        cell.volume.text = ticker.volume
 
         return cell
     }
@@ -125,9 +128,12 @@ class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSour
         for tickerFromList in tickerModel!.tickerList{
             let fetch = FetchFinacialData(ticker: tickerFromList.tickerStr!)
             fetch.fetchStockQuote()
-            print(fetch.getQuoteData(toFind: "regularMarketChangePercent"))
             tickerFromList.percentChange = fetch.getQuoteData(toFind: "regularMarketChangePercent")
             tickerFromList.afterHoursChange = fetch.getQuoteData(toFind: "postMarketChangePercent")
+            //tickerFromList.companyName = fetch.getQuoteData(toFind: "displayName")
+            tickerFromList.companyName = fetch.getQuoteData(toFind: "displayName")?.replacingOccurrences(of: "\"", with: "", options: NSString.CompareOptions.literal, range: nil)
+
+            tickerFromList.volume = fetch.getQuoteData(toFind: "regularMarketVolume")
         }
         tickerTable.reloadData()
     }
