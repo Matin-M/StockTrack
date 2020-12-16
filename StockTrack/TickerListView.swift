@@ -130,7 +130,6 @@ class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSour
             fetch.fetchStockQuote()
             tickerFromList.percentChange = fetch.getQuoteData(toFind: "regularMarketChangePercent")
             tickerFromList.afterHoursChange = fetch.getQuoteData(toFind: "postMarketChangePercent")
-            //tickerFromList.companyName = fetch.getQuoteData(toFind: "displayName")
             tickerFromList.companyName = fetch.getQuoteData(toFind: "displayName")?.replacingOccurrences(of: "\"", with: "", options: NSString.CompareOptions.literal, range: nil)
 
             tickerFromList.volume = fetch.getQuoteData(toFind: "regularMarketVolume")
