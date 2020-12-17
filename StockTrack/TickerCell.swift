@@ -9,8 +9,10 @@ import UIKit
 
 class TickerCell: UITableViewCell {
     
+    //FetchObj.
     var fetchFinancials: FetchFinacialData!
-    
+    //UIKit Views.
+    @IBOutlet weak var currentPrice: UILabel!
     @IBOutlet weak var volume: UILabel!
     @IBOutlet weak var companyName: UILabel!
     @IBOutlet weak var tickerLabel: UILabel!

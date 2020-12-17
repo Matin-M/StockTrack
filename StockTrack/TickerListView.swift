@@ -73,6 +73,7 @@ class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSour
 
         cell.companyName.text = ticker.companyName
         cell.volume.text = ticker.volume
+        cell.currentPrice.text = "$\(ticker.currentPrice!)"
 
         return cell
     }
@@ -107,7 +108,7 @@ class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSour
         let addAction = UIAlertAction(title: "Add", style: .default, handler: { [self] alert -> Void in
                 let firstTextField = alertController.textFields![0] as UITextField
                 //Add ticker object w/ textfield str.
-                tickerModel!.addTickerObject(tickerStr: firstTextField.text!, tickerChange: "0.0%", afterHours: "0.0%")
+                _ = tickerModel!.addTickerObject(tickerStr: firstTextField.text!, tickerChange: "0.0%", afterHours: "0.0%")
                 tickerTable.reloadData()
             })
         //Add alert action.
@@ -118,7 +119,6 @@ class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSour
             
         self.present(alertController, animated: true, completion: nil)
         
-        print(tickerModel?.getCount())
 
     }
     
@@ -126,13 +126,16 @@ class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBAction func refresh(_ sender: Any) {
 
         for tickerFromList in tickerModel!.tickerList{
+            //Set stats.
             let fetch = FetchFinacialData(ticker: tickerFromList.tickerStr!)
             fetch.fetchStockQuote()
             tickerFromList.percentChange = fetch.getQuoteData(toFind: "regularMarketChangePercent")
             tickerFromList.afterHoursChange = fetch.getQuoteData(toFind: "postMarketChangePercent")
             tickerFromList.companyName = fetch.getQuoteData(toFind: "displayName")?.replacingOccurrences(of: "\"", with: "", options: NSString.CompareOptions.literal, range: nil)
-
             tickerFromList.volume = fetch.getQuoteData(toFind: "regularMarketVolume")
+            tickerFromList.currentPrice = fetch.getQuoteData(toFind: "regularMarketPrice")
+            //Set FetchFinancialData object.
+            tickerFromList.fetchFinancials = fetch
         }
         tickerTable.reloadData()
     }
