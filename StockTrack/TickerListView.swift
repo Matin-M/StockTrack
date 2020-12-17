@@ -33,7 +33,6 @@ class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         //Set tableview row height.
         self.tickerTable.rowHeight = 90.0
-        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -50,7 +49,7 @@ class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         cell.tickerLabel.text = ticker.tickerStr
         
-        
+        //Change color of %change labels to reflect gains/losses.
         if(ticker.percentChange!.contains("-") == false){
             cell.percentChange.textColor = UIColor.green
             let index = ticker.percentChange!.index(ticker.percentChange!.startIndex, offsetBy: 5)
@@ -70,7 +69,8 @@ class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSour
             cell.afterHoursChange.textColor = UIColor.red
             cell.afterHoursChange.text = "↓\(ticker.afterHoursChange![..<index])%"
         }
-
+        
+        //Set remaining attributes. 
         cell.companyName.text = ticker.companyName
         cell.volume.text = ticker.volume
         cell.currentPrice.text = "$\(ticker.currentPrice!)"
@@ -104,27 +104,24 @@ class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSour
             alertController.addTextField { (textField : UITextField!) -> Void in
                 textField.placeholder = "Enter Ticker Symbol (i.e. TSLA)"
             }
-        //Add alert action.
+        //Add "Add" Action.
         let addAction = UIAlertAction(title: "Add", style: .default, handler: { [self] alert -> Void in
                 let firstTextField = alertController.textFields![0] as UITextField
                 //Add ticker object w/ textfield str.
                 _ = tickerModel!.addTickerObject(tickerStr: firstTextField.text!, tickerChange: "0.0%", afterHours: "0.0%")
                 tickerTable.reloadData()
-            })
-        //Add alert action.
+        })
+        //Add "Cancel" Action.
         let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: { (action : UIAlertAction!) -> Void in })
 
             alertController.addAction(addAction)
             alertController.addAction(cancelAction)
-            
+        //Present UIAlert.
         self.present(alertController, animated: true, completion: nil)
-        
-
     }
     
-    
+    //Refresh watchlist.
     @IBAction func refresh(_ sender: Any) {
-
         for tickerFromList in tickerModel!.tickerList{
             //Set stats.
             let fetch = FetchFinacialData(ticker: tickerFromList.tickerStr!)
@@ -138,6 +135,19 @@ class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSour
             tickerFromList.fetchFinancials = fetch
         }
         tickerTable.reloadData()
+    }
+    
+    //Send stock details to detailView.
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let selectedIndex: IndexPath = self.tickerTable.indexPath(for: sender as! UITableViewCell)!
+        let tickerObj = tickerModel!.getTickerObject(item: selectedIndex.row)
+        
+        if(segue.identifier == "detailSegue"){
+            if let detail: TickerDetailView = segue.destination as? TickerDetailView {
+                detail.fetchFinancials = tickerObj.fetchFinancials
+                detail.ticker = tickerObj
+            }
+        }
     }
     
     //Unwind segue.

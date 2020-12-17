@@ -8,11 +8,16 @@
 import UIKit
 
 class TickerDetailView: UIViewController {
+    
+    var fetchFinancials: FetchFinacialData!
+    var ticker: TickerLocal?
 
+    //UIKit elements.
+    @IBOutlet weak var tickerLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        tickerLabel.text = "\(ticker!.companyName ?? " ")(\(ticker!.tickerStr ?? " "))"
     }
     
     @IBAction func refresh(_ sender: Any) {
