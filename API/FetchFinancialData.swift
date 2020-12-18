@@ -9,8 +9,12 @@ import Foundation
 
 class FetchFinacialData{
     
-    //Class vars.
+    //Data
     var retrievedData: String?
+    var retrievedDetails: String?
+    var retrievedChart: String?
+    
+    //API key and headers.
     let API_KEY: String = "d1207125c7msh17c2c423fd6eb41p12ce5ajsna5cdc9a75064"
     var headers: [String:String]
     var ticker: String?
@@ -23,11 +27,9 @@ class FetchFinacialData{
             "x-rapidapi-host": "yahoo-finance-low-latency.p.rapidapi.com"]
     }
     
-    func getRetrievedJSON() -> String { return retrievedData! }
-    
     //Parse JSON data. NOTE: retrievedData is not JSON compliant.
     func getQuoteData(toFind: String) -> String? {
-        var str = retrievedData!
+        let str = retrievedData!
         var index: Int = 0
 
         if let range: Range<String.Index> = str.range(of: toFind) {
@@ -58,21 +60,21 @@ class FetchFinacialData{
     
     func fetchStockQuote() -> Void {
         let request = NSMutableURLRequest(url: NSURL(string: "https://yahoo-finance-low-latency.p.rapidapi.com/v6/finance/quote?symbols=\(ticker!)")! as URL, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10.0)
-        requestData(request: request)
+        retrievedData = requestData(request: request)
     }
     
     func fetchStockDetails() -> Void {
-        let request = NSMutableURLRequest(url: NSURL(string: "https://yahoo-finance-low-latency.p.rapidapi.com/v11/finance/quoteSummary/\(ticker!)?modules=defaultKeyStatistics%2CassetProfile%2C%20earningsHistory%2C%20recommendationTrend%2C%20esgScores")! as URL, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10.0)
-        requestData(request: request)
+        let request = NSMutableURLRequest(url: NSURL(string: "https://yahoo-finance-low-latency.p.rapidapi.com/v11/finance/quoteSummary/\(ticker!)?modules=defaultKeyStatistics%2CassetProfile%2CsummaryDetail%2CcashflowStatementHistory%2CsecFilings%2CrecommendationTrend%2Cearnings%2CearningsTrend%2C%2CesgScores%2CcalendarEvents&region=US&lang=en")! as URL, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10.0)
+        retrievedDetails = requestData(request: request)
     }
     
     func fetchStockChart() -> Void {
         let request = NSMutableURLRequest(url: NSURL(string: "https://yahoo-finance-low-latency.p.rapidapi.com/v8/finance/chart/\(ticker!)")! as URL, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10.0)
-        requestData(request: request)
+        retrievedChart = requestData(request: request)
     }
     
     //Make a RESTful API request to yahoo finance.
-    func requestData(request: NSMutableURLRequest) -> Void {
+    func requestData(request: NSMutableURLRequest) -> String {
 
         request.httpMethod = "GET"
         request.allHTTPHeaderFields = headers
@@ -117,7 +119,7 @@ class FetchFinacialData{
 
         dataTask.resume()
         sem.wait()
-        retrievedData = jsonData
+        return jsonData
     }
     
     //MARK: - HTTP Request error handlers.

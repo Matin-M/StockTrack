@@ -17,6 +17,7 @@ class TickerDetailView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        ticker?.fetchFinancials = fetchFinancials
         tickerLabel.text = "\(ticker!.companyName ?? " ")(\(ticker!.tickerStr ?? " "))"
     }
     

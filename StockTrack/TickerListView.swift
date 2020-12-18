@@ -60,14 +60,19 @@ class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSour
             cell.percentChange.text = "↓\(ticker.percentChange![..<index])%"
         }
         
-        if(ticker.afterHoursChange!.contains("-") == false){
-            let index = ticker.afterHoursChange!.index(ticker.afterHoursChange!.startIndex, offsetBy: 5)
-            cell.afterHoursChange.textColor = UIColor.green
-            cell.afterHoursChange.text = "↑\(ticker.afterHoursChange![..<index])%"
+        if(ticker.afterHoursChange != nil){
+            if(ticker.afterHoursChange!.contains("-") == false){
+                let index = ticker.afterHoursChange!.index(ticker.afterHoursChange!.startIndex, offsetBy: 5)
+                cell.afterHoursChange.textColor = UIColor.green
+                cell.afterHoursChange.text = "↑\(ticker.afterHoursChange![..<index])%"
+            }else{
+                let index = ticker.afterHoursChange!.index(ticker.afterHoursChange!.startIndex, offsetBy: 5)
+                cell.afterHoursChange.textColor = UIColor.red
+                cell.afterHoursChange.text = "↓\(ticker.afterHoursChange![..<index])%"
+            }
         }else{
-            let index = ticker.afterHoursChange!.index(ticker.afterHoursChange!.startIndex, offsetBy: 5)
-            cell.afterHoursChange.textColor = UIColor.red
-            cell.afterHoursChange.text = "↓\(ticker.afterHoursChange![..<index])%"
+            cell.afterHoursChange.textColor = UIColor.yellow
+            cell.afterHoursChange.text = "N/A"
         }
         
         //Set remaining attributes. 
@@ -144,7 +149,6 @@ class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         if(segue.identifier == "detailSegue"){
             if let detail: TickerDetailView = segue.destination as? TickerDetailView {
-                detail.fetchFinancials = tickerObj.fetchFinancials
                 detail.ticker = tickerObj
             }
         }
