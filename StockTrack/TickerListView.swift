@@ -144,10 +144,9 @@ class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     //Send stock details to detailView.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let selectedIndex: IndexPath = self.tickerTable.indexPath(for: sender as! UITableViewCell)!
-        let tickerObj = tickerModel!.getTickerObject(item: selectedIndex.row)
-        
         if(segue.identifier == "detailSegue"){
+            let selectedIndex: IndexPath = self.tickerTable.indexPath(for: sender as! UITableViewCell)!
+            let tickerObj = tickerModel!.getTickerObject(item: selectedIndex.row)
             if let detail: TickerDetailView = segue.destination as? TickerDetailView {
                 detail.ticker = tickerObj
             }
