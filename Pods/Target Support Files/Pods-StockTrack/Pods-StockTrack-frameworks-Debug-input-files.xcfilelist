@@ -1,0 +1,3 @@
+${PODS_ROOT}/Target Support Files/Pods-StockTrack/Pods-StockTrack-frameworks.sh
+${BUILT_PRODUCTS_DIR}/Charts/Charts.framework
+${BUILT_PRODUCTS_DIR}/TinyConstraints/TinyConstraints.framework

@@ -16,7 +16,7 @@ class NewsView: UIViewController, WKNavigationDelegate {
         super.viewDidLoad()
         
         webView?.navigationDelegate = self
-        if let url = URL(string: "https://www.barrons.com/topics/markets?mod=article_flashline") {
+        if let url = URL(string: "https://www.marketwatch.com/latest-news") {
             let request = URLRequest(url: url)
             webView.load(request)
         }

@@ -1,0 +1,6 @@
+framework module Pods_StockTrack {
+  umbrella header "Pods-StockTrack-umbrella.h"
+
+  export *
+  module * { export * }
+}
