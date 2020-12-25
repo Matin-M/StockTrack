@@ -58,7 +58,7 @@ class TickerDetailView: UIViewController, ChartViewDelegate {
     @IBOutlet weak var trailingPE: UILabel!
     
     //Datasets.
-    let priceData: [ChartDataEntry]? = nil
+    var priceData: [ChartDataEntry] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,6 +66,8 @@ class TickerDetailView: UIViewController, ChartViewDelegate {
         tickerLabel.text = "\(ticker!.companyName ?? " ")(\(ticker!.tickerStr ?? " "))"
         
         //Configure lineChartView.
+        lineChartView.layer.cornerRadius = 8
+        lineChartView.backgroundColor = .gray
         lineChartView.addSubview(stockPriceLineChart)
         stockPriceLineChart.centerInSuperview()
         stockPriceLineChart.width(to: lineChartView)
@@ -73,11 +75,9 @@ class TickerDetailView: UIViewController, ChartViewDelegate {
         
         //Make call to API.
         fetchFinancials.fetchStockChart(interval: "5m", range: "1d")
-        print(fetchFinancials.getChartData()!.x)
-        print(fetchFinancials.getChartData()!.y)
         
         //Set graph data.
-        //setPriceData()
+        setPriceData()
         
         //Configure stats view.
         statsView.backgroundColor = .gray
@@ -87,7 +87,13 @@ class TickerDetailView: UIViewController, ChartViewDelegate {
     }
     
     func setPriceData() -> Void{
-        let dataSet = LineChartDataSet(entries: priceData!, label: "Price history")
+        //Populate dataset.
+        let chartData: (x: [Double],y: [Double]) = fetchFinancials.getChartData()!
+        for(x, y) in zip(chartData.x, chartData.y){
+            priceData.append(ChartDataEntry(x: x, y: y))
+        }
+        let dataSet = LineChartDataSet(entries: priceData, label: "Price history")
+        
         dataSet.drawCirclesEnabled = false
         dataSet.mode = .cubicBezier
         dataSet.lineWidth = 2
