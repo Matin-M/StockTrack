@@ -20,6 +20,7 @@ class TickerDetailView: UIViewController, ChartViewDelegate {
     @IBOutlet weak var rangeSelector: UISegmentedControl!
     @IBOutlet weak var lineChartView: UIView!
     @IBOutlet weak var tickerLabel: UILabel!
+    @IBOutlet weak var statsView: UIView!
     lazy var stockPriceLineChart: LineChartView = {
         let chartView = LineChartView()
         //Set chart properties.
@@ -60,7 +61,13 @@ class TickerDetailView: UIViewController, ChartViewDelegate {
         print(fetchFinancials.getChartData()!.y)
         
         //Set graph data.
-        setPriceData()
+        //setPriceData()
+        
+        //Configure stats view.
+        statsView.backgroundColor = .gray
+        statsView.frame = CGRect(x: statsView.frame.origin.x, y: statsView.frame.origin.y, width: statsView.frame.width, height: statsView.frame.height)
+        statsView.layer.cornerRadius = 8
+        
     }
     
     func setPriceData() -> Void{

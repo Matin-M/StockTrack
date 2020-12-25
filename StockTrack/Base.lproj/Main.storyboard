@@ -250,6 +250,12 @@
                                                     <action selector="rangeAction:" destination="ejR-N4-nvA" eventType="valueChanged" id="JmD-ne-sce"/>
                                                 </connections>
                                             </segmentedControl>
+                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="W6Q-SE-IOY">
+                                                <rect key="frame" x="8" y="305" width="398" height="435"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" red="0.30588235289999999" green="0.30588235289999999" blue="0.30588235289999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
@@ -294,6 +300,7 @@
                     <connections>
                         <outlet property="lineChartView" destination="6hf-pe-MbB" id="Mxi-nw-NWI"/>
                         <outlet property="rangeSelector" destination="Ead-1T-y5S" id="gCi-6k-xEA"/>
+                        <outlet property="statsView" destination="W6Q-SE-IOY" id="yyO-LL-FKh"/>
                         <outlet property="tickerLabel" destination="bMc-y8-39m" id="WKc-a8-sEd"/>
                     </connections>
                 </viewController>
