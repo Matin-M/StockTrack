@@ -58,6 +58,73 @@ class FetchFinacialData{
         return result
     }
     
+    
+    func getChartData() -> (x: [Double],y: [Double])?{
+        let str = retrievedChart!
+        var index: Int = 0
+
+        //Find timestamps.
+        if let range: Range<String.Index> = str.range(of: "timestamp") {
+            index = str.distance(from: str.startIndex, to: range.lowerBound)
+            print("index: ", index)
+        }
+        else {
+            return nil
+        }
+
+        var i = index+12
+        var result: String = ""
+        var count: Int = 0
+        var timeStamps: [Double] = []
+        
+        while(true){
+            let offset = str.index(str.startIndex, offsetBy: i)
+            if(str[offset] == ","){
+                count += 1
+                timeStamps.append(Double(result)!)
+                result = ""
+            }else{
+                result.append(str[offset])
+            }
+            i+=1
+            if(str[offset] == "]"){
+                break
+            }
+        }
+        
+        //Find price values.
+        if let range: Range<String.Index> = str.range(of: "high") {
+            index = str.distance(from: str.startIndex, to: range.lowerBound)
+            print("index: ", index)
+        }
+        else {
+            return nil
+        }
+        
+        i = index+7
+        result = ""
+        count = 0
+        var values: [Double] = []
+        
+        while(true){
+            let offset = str.index(str.startIndex, offsetBy: i)
+            if(str[offset] == ","){
+                count += 1
+                values.append(Double(result)!)
+                result = ""
+            }else{
+                result.append(str[offset])
+            }
+            i+=1
+            if(str[offset] == "]"){
+                break
+            }
+        }
+
+        return (timeStamps,values)
+    }
+ 
+    
     func fetchStockQuote() -> Void {
         let request = NSMutableURLRequest(url: NSURL(string: "https://yahoo-finance-low-latency.p.rapidapi.com/v6/finance/quote?symbols=\(ticker!)")! as URL, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10.0)
         retrievedData = requestData(request: request)
@@ -68,8 +135,8 @@ class FetchFinacialData{
         retrievedDetails = requestData(request: request)
     }
     
-    func fetchStockChart() -> Void {
-        let request = NSMutableURLRequest(url: NSURL(string: "https://yahoo-finance-low-latency.p.rapidapi.com/v8/finance/chart/\(ticker!)")! as URL, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10.0)
+    func fetchStockChart(interval: String, range: String) -> Void {
+        let request = NSMutableURLRequest(url: NSURL(string: "https://yahoo-finance-low-latency.p.rapidapi.com/v8/finance/chart/\(ticker!)?interval=\(interval)&range=\(range)&region=US&lang=en")! as URL, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10.0)
         retrievedChart = requestData(request: request)
     }
     
@@ -101,7 +168,7 @@ class FetchFinacialData{
                     return
                 }
                 
-                //Check response MIME adherance to json.
+                //Check response MIME adherance to JSON.
                 guard let mime = response?.mimeType, mime == "application/json" else {
                     print("Wrong MIME type!")
                     return
@@ -129,6 +196,7 @@ class FetchFinacialData{
     }
     
     func handleServerError(response: HTTPURLResponse) -> Void{
+        //Caused when number of API requests exceeds daily quota.
         print("A server error occurred!")
     }
     

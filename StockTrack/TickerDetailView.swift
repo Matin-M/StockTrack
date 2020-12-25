@@ -22,7 +22,7 @@ class TickerDetailView: UIViewController, ChartViewDelegate {
     @IBOutlet weak var tickerLabel: UILabel!
     lazy var stockPriceLineChart: LineChartView = {
         let chartView = LineChartView()
-        //Customize chart.
+        //Set chart properties.
         chartView.backgroundColor = .systemGray
         chartView.rightAxis.enabled = false
         let yAxis = chartView.leftAxis
@@ -45,7 +45,7 @@ class TickerDetailView: UIViewController, ChartViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        ticker?.fetchFinancials = fetchFinancials
+        fetchFinancials = ticker?.fetchFinancials
         tickerLabel.text = "\(ticker!.companyName ?? " ")(\(ticker!.tickerStr ?? " "))"
         
         //Configure lineChartView.
@@ -53,6 +53,11 @@ class TickerDetailView: UIViewController, ChartViewDelegate {
         stockPriceLineChart.centerInSuperview()
         stockPriceLineChart.width(to: lineChartView)
         stockPriceLineChart.height(to: lineChartView)
+        
+        //Make call to API.
+        fetchFinancials.fetchStockChart(interval: "5m", range: "1d")
+        print(fetchFinancials.getChartData()!.x)
+        print(fetchFinancials.getChartData()!.y)
         
         //Set graph data.
         setPriceData()
