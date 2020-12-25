@@ -41,6 +41,22 @@ class TickerDetailView: UIViewController, ChartViewDelegate {
         return chartView
     }()
     
+    //Stats labels.
+    @IBOutlet weak var eps: UILabel!
+    @IBOutlet weak var range: UILabel!
+    @IBOutlet weak var bid: UILabel!
+    @IBOutlet weak var ask: UILabel!
+    @IBOutlet weak var earningsDate: UILabel!
+    @IBOutlet weak var beta: UILabel!
+    @IBOutlet weak var divYield: UILabel!
+    @IBOutlet weak var sector: UILabel!
+    @IBOutlet weak var splitFactor: UILabel!
+    @IBOutlet weak var splitDate: UILabel!
+    @IBOutlet weak var profitMargins: UILabel!
+    @IBOutlet weak var marketCap: UILabel!
+    @IBOutlet weak var forwardPE: UILabel!
+    @IBOutlet weak var trailingPE: UILabel!
+    
     //Datasets.
     let priceData: [ChartDataEntry]? = nil
     
