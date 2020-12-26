@@ -21,6 +21,9 @@ class FetchFinacialData{
     
     //Init using ticker symbol.
     init(ticker: String){
+        self.retrievedData = ""
+        self.retrievedDetails = ""
+        self.retrievedChart = ""
         self.ticker = ticker
         headers = [
             "x-rapidapi-key": API_KEY,

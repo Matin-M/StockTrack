@@ -240,8 +240,8 @@
                                                 <rect key="frame" x="8" y="261" width="398" height="32"/>
                                                 <segments>
                                                     <segment title="1 Day"/>
-                                                    <segment title="5 Day"/>
-                                                    <segment title="1 Month"/>
+                                                    <segment title="1 Week"/>
+                                                    <segment title="3 Month"/>
                                                     <segment title="YTD"/>
                                                 </segments>
                                                 <connections>

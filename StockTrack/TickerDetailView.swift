@@ -36,8 +36,7 @@ class TickerDetailView: UIViewController, ChartViewDelegate {
         chartView.xAxis.labelFont = .boldSystemFont(ofSize: CGFloat(5))
         chartView.xAxis.setLabelCount(5, force: false)
         chartView.xAxis.axisLineColor = .white
-        chartView.animate(xAxisDuration: 1)
-        //chartView.animate(yAxisDuration: 1)
+        chartView.animate(xAxisDuration: 2)
         return chartView
     }()
     
@@ -66,6 +65,7 @@ class TickerDetailView: UIViewController, ChartViewDelegate {
         tickerLabel.text = "\(ticker!.companyName ?? " ")(\(ticker!.tickerStr ?? " "))"
         
         //Configure lineChartView.
+        lineChartView.frame = CGRect(x: lineChartView.frame.origin.x, y: lineChartView.frame.origin.y, width: lineChartView.frame.width, height: lineChartView.frame.height)
         lineChartView.layer.cornerRadius = 8
         lineChartView.backgroundColor = .gray
         lineChartView.addSubview(stockPriceLineChart)
@@ -74,10 +74,13 @@ class TickerDetailView: UIViewController, ChartViewDelegate {
         stockPriceLineChart.height(to: lineChartView)
         
         //Make call to API.
-        fetchFinancials.fetchStockChart(interval: "5m", range: "1d")
-        
         //Set graph data.
-        setPriceData()
+        if(fetchFinancials.retrievedChart != ""){
+            fetchFinancials.fetchStockChart(interval: "5m", range: "1d")
+            setPriceData()
+        }else{
+            print("Please update!")
+        }
         
         //Configure stats view.
         statsView.backgroundColor = .gray
@@ -106,12 +109,30 @@ class TickerDetailView: UIViewController, ChartViewDelegate {
         stockPriceLineChart.data = data
     }
     
+    func setStats() -> Void{
+        
+    }
+    
     @IBAction func refresh(_ sender: Any) {
         
     }
     
     @IBAction func rangeAction(_ sender: Any) {
-        
+        priceData.removeAll()
+        let range: String = rangeSelector.titleForSegment(at: rangeSelector.selectedSegmentIndex)!
+        fetchFinancials.retrievedChart = ""
+        if(range == "1 Day"){
+            fetchFinancials.fetchStockChart(interval: "5m", range: "1d")
+        }else if(range == "5 Day"){
+            fetchFinancials.fetchStockChart(interval: "1d", range: "1wk")
+        }else if(range == "3 Month"){
+            fetchFinancials.fetchStockChart(interval: "1d", range: "3mo")
+        }else{
+            fetchFinancials.fetchStockChart(interval: "1wk", range: "ytd")
+        }
+        setPriceData()
+        stockPriceLineChart.notifyDataSetChanged()
+        print(range)
     }
     
     //MARK: - Chart Protocols
