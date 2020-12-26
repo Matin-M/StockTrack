@@ -232,14 +232,12 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RUE-UE-xAk">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="1912"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6hf-pe-MbB">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6hf-pe-MbB">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="253"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" red="0.30588235289999999" green="0.30588235289999999" blue="0.30588235289999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             </view>
-                                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Ead-1T-y5S">
+                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Ead-1T-y5S">
                                                 <rect key="frame" x="8" y="261" width="398" height="32"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <segments>
                                                     <segment title="1 Day"/>
                                                     <segment title="5 Day"/>
@@ -250,9 +248,8 @@
                                                     <action selector="rangeAction:" destination="ejR-N4-nvA" eventType="valueChanged" id="JmD-ne-sce"/>
                                                 </connections>
                                             </segmentedControl>
-                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="W6Q-SE-IOY">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W6Q-SE-IOY">
                                                 <rect key="frame" x="8" y="305" width="398" height="414"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="EPS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2GT-Z0-29G">
                                                         <rect key="frame" x="8" y="8" width="31" height="21"/>
@@ -457,7 +454,18 @@
                                         </subviews>
                                         <color key="backgroundColor" red="0.30588235289999999" green="0.30588235289999999" blue="0.30588235289999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="W6Q-SE-IOY" secondAttribute="bottom" constant="1193" id="3Ov-iV-nkC"/>
+                                            <constraint firstItem="6hf-pe-MbB" firstAttribute="top" secondItem="RUE-UE-xAk" secondAttribute="top" id="97o-KS-4zH"/>
+                                            <constraint firstAttribute="trailing" secondItem="W6Q-SE-IOY" secondAttribute="trailing" constant="8" id="C15-o1-bbQ"/>
                                             <constraint firstAttribute="height" constant="1912" id="GSk-Ow-DE5"/>
+                                            <constraint firstAttribute="trailing" secondItem="6hf-pe-MbB" secondAttribute="trailing" id="KlN-IO-TqM"/>
+                                            <constraint firstItem="Ead-1T-y5S" firstAttribute="top" secondItem="6hf-pe-MbB" secondAttribute="bottom" constant="8" symbolic="YES" id="Sjz-Lp-twj"/>
+                                            <constraint firstAttribute="trailing" secondItem="Ead-1T-y5S" secondAttribute="trailing" constant="8" id="Vg1-9W-Fot"/>
+                                            <constraint firstAttribute="bottom" secondItem="6hf-pe-MbB" secondAttribute="bottom" constant="1659" id="Wfd-v6-yxm"/>
+                                            <constraint firstItem="6hf-pe-MbB" firstAttribute="leading" secondItem="RUE-UE-xAk" secondAttribute="leading" id="agd-rE-17J"/>
+                                            <constraint firstItem="W6Q-SE-IOY" firstAttribute="leading" secondItem="RUE-UE-xAk" secondAttribute="leading" constant="8" id="kV5-mC-nPJ"/>
+                                            <constraint firstItem="W6Q-SE-IOY" firstAttribute="top" secondItem="Ead-1T-y5S" secondAttribute="bottom" constant="13" id="ojW-Rv-kjK"/>
+                                            <constraint firstItem="Ead-1T-y5S" firstAttribute="leading" secondItem="RUE-UE-xAk" secondAttribute="leading" constant="8" id="sav-dd-hOw"/>
                                         </constraints>
                                     </view>
                                 </subviews>
