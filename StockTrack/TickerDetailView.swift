@@ -114,7 +114,7 @@ class TickerDetailView: UIViewController, ChartViewDelegate {
     }
     
     @IBAction func refresh(_ sender: Any) {
-        
+        setStats()
     }
     
     @IBAction func rangeAction(_ sender: Any) {

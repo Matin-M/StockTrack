@@ -48,6 +48,7 @@ class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSour
         let ticker = tickerModel!.getTickerObject(item:indexPath.row)
         
         cell.tickerLabel.text = ticker.tickerStr
+        cell.backgroundColor = UIColor.clear
         
         //Change color of %change labels to reflect gains/losses.
         if(ticker.percentChange!.contains("-") == false){
@@ -92,10 +93,8 @@ class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSour
         return UITableViewCell.EditingStyle.delete
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath)
-    {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath){
         tickerModel!.removeTickerObject(item: indexPath.row)
-
         self.tickerTable.beginUpdates()
         self.tickerTable.deleteRows(at: [indexPath], with: .automatic)
         self.tickerTable.endUpdates()
@@ -103,7 +102,6 @@ class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     //Adds a ticker.
     @IBAction func addTicker(_ sender: Any) {
-        
         //Create Alertcontroller object.
         let alertController = UIAlertController(title: "Add a stock to your watchlist", message: "", preferredStyle: .alert)
             alertController.addTextField { (textField : UITextField!) -> Void in
