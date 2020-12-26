@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -13,23 +13,23 @@
             <objects>
                 <viewController id="01J-lp-oVM" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="StockTrack📈" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Os4-jW-wfw">
-                                <rect key="frame" x="47" y="258" width="321" height="61"/>
+                                <rect key="frame" x="47" y="206" width="321" height="61"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="51"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Created by Matin Massoudi" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8w6-5R-EtS">
-                                <rect key="frame" x="103" y="639" width="208" height="21"/>
+                                <rect key="frame" x="103" y="516" width="208" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version 1.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="npj-eY-Ss7">
-                                <rect key="frame" x="141" y="347" width="132" height="34"/>
+                                <rect key="frame" x="141" y="275" width="132" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -38,18 +38,18 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemGray2Color"/>
                         <constraints>
-                            <constraint firstItem="8w6-5R-EtS" firstAttribute="top" secondItem="npj-eY-Ss7" secondAttribute="bottom" constant="258" id="7ga-nm-8t2"/>
-                            <constraint firstItem="Os4-jW-wfw" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="214" id="7zj-FS-hEb"/>
-                            <constraint firstItem="8w6-5R-EtS" firstAttribute="top" secondItem="npj-eY-Ss7" secondAttribute="bottom" constant="258" id="A0m-u7-lp3"/>
-                            <constraint firstItem="Os4-jW-wfw" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="47" id="DNu-5j-DFp"/>
-                            <constraint firstItem="8w6-5R-EtS" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="103" id="XvA-qn-41w"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="8w6-5R-EtS" secondAttribute="trailing" constant="103" id="auV-nh-yyY"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="8w6-5R-EtS" secondAttribute="bottom" constant="202" id="bQb-dJ-kUl"/>
-                            <constraint firstItem="npj-eY-Ss7" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="141" id="doe-d8-9Ti"/>
-                            <constraint firstItem="npj-eY-Ss7" firstAttribute="top" secondItem="Os4-jW-wfw" secondAttribute="bottom" constant="28" id="hcZ-01-0ax"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="npj-eY-Ss7" secondAttribute="trailing" constant="141" id="jtz-tG-bKt"/>
-                            <constraint firstItem="npj-eY-Ss7" firstAttribute="top" secondItem="Os4-jW-wfw" secondAttribute="bottom" constant="28" id="lSV-yj-DCv"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Os4-jW-wfw" secondAttribute="trailing" constant="46" id="urG-je-2eB"/>
+                            <constraint firstItem="8w6-5R-EtS" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="103" id="2tF-mz-9KS"/>
+                            <constraint firstItem="npj-eY-Ss7" firstAttribute="top" secondItem="Os4-jW-wfw" secondAttribute="bottom" constant="8" symbolic="YES" id="A7A-O1-6xP"/>
+                            <constraint firstItem="8w6-5R-EtS" firstAttribute="top" secondItem="npj-eY-Ss7" secondAttribute="bottom" constant="207" id="Dng-GO-fiZ"/>
+                            <constraint firstItem="8w6-5R-EtS" firstAttribute="top" secondItem="npj-eY-Ss7" secondAttribute="bottom" constant="207" id="IXc-W4-2Vn"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="8w6-5R-EtS" secondAttribute="bottom" constant="199" id="OUf-Fw-rCw"/>
+                            <constraint firstItem="npj-eY-Ss7" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="141" id="XOG-3b-Ugt"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="8w6-5R-EtS" secondAttribute="trailing" constant="103" id="dgK-RJ-BnK"/>
+                            <constraint firstItem="Os4-jW-wfw" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="206" id="fCC-ab-Nwu"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="npj-eY-Ss7" secondAttribute="trailing" constant="141" id="fc0-xN-2Lq"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Os4-jW-wfw" secondAttribute="trailing" constant="46" id="soC-BW-6gw"/>
+                            <constraint firstItem="npj-eY-Ss7" firstAttribute="top" secondItem="Os4-jW-wfw" secondAttribute="bottom" constant="8" symbolic="YES" id="tea-hO-XCY"/>
+                            <constraint firstItem="Os4-jW-wfw" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="47" id="uGc-Oo-6RY"/>
                         </constraints>
                     </view>
                 </viewController>
