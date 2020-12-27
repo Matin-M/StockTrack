@@ -74,8 +74,7 @@ class TickerDetailView: UIViewController, ChartViewDelegate {
         stockPriceLineChart.height(to: lineChartView)
         
         //Make call to API.
-        //Set graph data.
-        if(fetchFinancials.retrievedChart != ""){
+        if(fetchFinancials.retrievedData != ""){
             fetchFinancials.fetchStockChart(interval: "5m", range: "1d")
             setPriceData()
         }else{
@@ -87,6 +86,31 @@ class TickerDetailView: UIViewController, ChartViewDelegate {
         statsView.frame = CGRect(x: statsView.frame.origin.x, y: statsView.frame.origin.y, width: statsView.frame.width, height: statsView.frame.height)
         statsView.layer.cornerRadius = 8
         
+        //Set values for stats.
+        setStats()
+    }
+    
+    func setStats() -> Void{
+        fetchFinancials.fetchStockDetails()
+        //Debug
+        eps.text = fetchFinancials.extractData(data: FetchFinacialData.Databases.details, toFind: "trailingEps", delimiter: "\"", skipAmnt: 23)
+        range.text =  "$\(fetchFinancials.extractData(data: FetchFinacialData.Databases.details, toFind: "fiftyTwoWeekLow", delimiter: ",", skipAmnt: 9)!) - $\(fetchFinancials.extractData(data: FetchFinacialData.Databases.details, toFind: "fiftyTwoWeekHigh", delimiter: ",", skipAmnt: 9)!)"
+        bid.text = fetchFinancials.extractData(data: FetchFinacialData.Databases.details, toFind: "bid", delimiter: ",", skipAmnt: 9)
+        ask.text = fetchFinancials.extractData(data: FetchFinacialData.Databases.details, toFind: "ask", delimiter: ",", skipAmnt: 9)
+        earningsDate.text = fetchFinancials.extractData(data: FetchFinacialData.Databases.details, toFind: "earningsDate", delimiter: "\"", skipAmnt: 28)
+        beta.text = fetchFinancials.extractData(data: FetchFinacialData.Databases.details, toFind: "beta", delimiter: "\"", skipAmnt: 25)
+        if(fetchFinancials.extractData(data: FetchFinacialData.Databases.details, toFind: "dividendYield", delimiter: "\"", skipAmnt: 3) != ""){
+            divYield.text = fetchFinancials.extractData(data: FetchFinacialData.Databases.details, toFind: "dividentYield", delimiter: "\"", skipAmnt: 3)
+        }else{
+            divYield.text = "N/A"
+        }
+        sector.text = fetchFinancials.extractData(data: FetchFinacialData.Databases.details, toFind: "sector", delimiter: "\"", skipAmnt: 3)
+        splitFactor.text = fetchFinancials.extractData(data: FetchFinacialData.Databases.details, toFind: "lastSplitFactor", delimiter: "\"", skipAmnt: 3)
+        splitDate.text = fetchFinancials.extractData(data: FetchFinacialData.Databases.details, toFind: "lastSplitDate", delimiter: "\"", skipAmnt: 27)
+        profitMargins.text = fetchFinancials.extractData(data: FetchFinacialData.Databases.details, toFind: "profitMargins", delimiter: "\"", skipAmnt: 25)
+        marketCap.text = fetchFinancials.getQuoteData(toFind: "marketCap")
+        forwardPE.text = fetchFinancials.getQuoteData(toFind: "forwardPE")
+        trailingPE.text = fetchFinancials.getQuoteData(toFind: "trailingPE")
     }
     
     func setPriceData() -> Void{
@@ -107,10 +131,6 @@ class TickerDetailView: UIViewController, ChartViewDelegate {
         let data = LineChartData(dataSet: dataSet)
         data.setDrawValues(false)
         stockPriceLineChart.data = data
-    }
-    
-    func setStats() -> Void{
-        
     }
     
     @IBAction func refresh(_ sender: Any) {

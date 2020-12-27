@@ -19,6 +19,11 @@ class FetchFinacialData{
     var headers: [String:String]
     var ticker: String?
     
+    //Database selector.
+    enum Databases: CaseIterable {
+        case data, details, chart
+    }
+    
     //Init using ticker symbol.
     init(ticker: String){
         self.retrievedData = ""
@@ -58,9 +63,46 @@ class FetchFinacialData{
 
         print(result)
         
-        return result
+        return extractData(data: Databases.data, toFind: toFind, delimiter: ",", skipAmnt: 2)
     }
     
+    func extractData(data dataToParse: Databases, toFind: String, delimiter: Character, skipAmnt: Int) -> String?{
+        var str = ""
+        switch dataToParse {
+        case .data:
+            str = retrievedData!
+        case .details:
+            str = retrievedDetails!
+        case .chart:
+            str = retrievedChart!
+        }
+        
+        var index: Int = 0
+        if let range: Range<String.Index> = str.range(of: toFind) {
+            index = str.distance(from: str.startIndex, to: range.lowerBound)
+            print("index: ", index)
+        }
+        else {
+            return nil
+        }
+
+        var i = index+toFind.count+skipAmnt
+        var result: String = ""
+
+        while(true){
+            let offset = str.index(str.startIndex, offsetBy: i)
+            if(str[offset] == delimiter){
+                break
+            }else{
+                result.append(str[offset])
+            }
+            i+=1
+        }
+
+        print(result)
+        
+        return result
+    }
     
     func getChartData() -> (x: [Double],y: [Double])?{
         let str = retrievedChart!
