@@ -23,11 +23,11 @@ class TickerLocal{
     
     init(tickerName: String){
         tickerStr = tickerName
-        percentChange = "0.000%"
-        afterHoursChange = "0.000%"
-        volume = "0"
+        percentChange = "Refresh!"
+        afterHoursChange = "Refresh!"
+        volume = "Refresh!"
         companyName = "Display Name N/A"
-        currentPrice = "Refresh"
+        currentPrice = "Refresh!"
     }
     
 }

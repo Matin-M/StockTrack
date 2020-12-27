@@ -33,6 +33,9 @@ class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         //Set tableview row height.
         self.tickerTable.rowHeight = 90.0
+        
+        //Update tickers with data upon open.
+        refreshTickers()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -80,7 +83,6 @@ class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSour
         cell.companyName.text = ticker.companyName
         cell.volume.text = ticker.volume
         cell.currentPrice.text = "$\(ticker.currentPrice!)"
-
         return cell
     }
     
@@ -111,7 +113,7 @@ class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSour
         let addAction = UIAlertAction(title: "Add", style: .default, handler: { [self] alert -> Void in
                 let firstTextField = alertController.textFields![0] as UITextField
                 //Add ticker object w/ textfield str.
-                _ = tickerModel!.addTickerObject(tickerStr: firstTextField.text!, tickerChange: "0.0%", afterHours: "0.0%")
+                _ = tickerModel!.addTickerObject(tickerStr: firstTextField.text!)
                 tickerTable.reloadData()
         })
         //Add "Cancel" Action.
@@ -123,8 +125,7 @@ class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.present(alertController, animated: true, completion: nil)
     }
     
-    //Refresh watchlist.
-    @IBAction func refresh(_ sender: Any) {
+    func refreshTickers() -> Void{
         for tickerFromList in tickerModel!.tickerList{
             //Set stats.
             let fetch = FetchFinacialData(ticker: tickerFromList.tickerStr!)
@@ -137,6 +138,11 @@ class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSour
             //Set FetchFinancialData object.
             tickerFromList.fetchFinancials = fetch
         }
+    }
+    
+    //Refresh watchlist.
+    @IBAction func refresh(_ sender: Any) {
+        refreshTickers()
         tickerTable.reloadData()
     }
     

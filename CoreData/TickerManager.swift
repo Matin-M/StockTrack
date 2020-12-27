@@ -70,11 +70,9 @@ class TickerManager{
         
     }
     
-    func addTickerObject(tickerStr: String, tickerChange: String, afterHours: String) -> TickerLocal{
+    func addTickerObject(tickerStr: String) -> TickerLocal{
         //Append a new local ticker object.
         let newTicker = TickerLocal(tickerName: tickerStr)
-        newTicker.percentChange = tickerChange
-        newTicker.afterHoursChange = afterHours
         tickerList.append(newTicker)
         
         //Ticker Entity
