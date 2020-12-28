@@ -4,6 +4,5 @@ StockTrack is a stock market watchlist application for iOS with comprehensive st
 # API:
 StockTrack uses the Yahoo Finance Low Latency API provided by rapidAPI.com
 
-# CocoaPods:
-Graph implemented using Charts.
-Autolayouts done using tinyconstraints.
+# External Libraries Used(via CocoaPods):
+Graph implemented using Charts, Autolayouts done using tinyconstraints, and menu implemented using SideMenu.
