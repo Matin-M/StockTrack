@@ -2,21 +2,25 @@ PODS:
   - Charts (3.6.0):
     - Charts/Core (= 3.6.0)
   - Charts/Core (3.6.0)
+  - SideMenu (6.5.0)
   - TinyConstraints (4.0.1)
 
 DEPENDENCIES:
   - Charts
+  - SideMenu
   - TinyConstraints
 
 SPEC REPOS:
   trunk:
     - Charts
+    - SideMenu
     - TinyConstraints
 
 SPEC CHECKSUMS:
   Charts: b1e3a1f5a1c9ba5394438ca3b91bd8c9076310af
+  SideMenu: f583187d21c5b1dd04c72002be544b555a2627a2
   TinyConstraints: 8dd91295e56797648c7bc335dd20e1d91ec4c192
 
-PODFILE CHECKSUM: b8dd727eeaf566d7548745a30b906cc8b23617e9
+PODFILE CHECKSUM: 0f1e53b48e4d07d483f59f5b1d514af766066725
 
 COCOAPODS: 1.10.0

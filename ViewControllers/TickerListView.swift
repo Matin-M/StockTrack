@@ -7,6 +7,7 @@
 
 import UIKit
 import CoreData
+import SideMenu
 
 class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -15,11 +16,18 @@ class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSour
     let managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 
     @IBOutlet weak var tickerTable: UITableView!
+    var menu: SideMenuNavigationController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //Instantiate tickerModel
+        //Instantiate tickerModel.
         tickerModel = TickerManager(managedObject: managedObjectContext)
+        
+        //Configure menu View Controller.
+        menu = SideMenuNavigationController(rootViewController: MenuTableView())
+        menu?.leftSide = true
+        SideMenuManager.default.leftMenuNavigationController = menu
+        SideMenuManager.default.addPanGestureToPresent(toView: self.view)
         
         //Designating tableview delegate and datasource.
         tickerTable.delegate = self
@@ -36,6 +44,10 @@ class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         //Update tickers with data upon open.
         refreshTickers()
+    }
+    
+    @IBAction func didTapMenu(_ sender: Any) {
+        present(menu!, animated: true)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -64,7 +76,7 @@ class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSour
             cell.percentChange.text = "↓\(ticker.percentChange![..<index])%"
         }
         
-        if(ticker.afterHoursChange != nil){
+        if(ticker.afterHoursChange != nil && ticker.afterHoursChange != "0.0"){
             if(ticker.afterHoursChange!.contains("-") == false){
                 let index = ticker.afterHoursChange!.index(ticker.afterHoursChange!.startIndex, offsetBy: 5)
                 cell.afterHoursChange.textColor = UIColor.green
@@ -76,7 +88,7 @@ class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSour
             }
         }else{
             cell.afterHoursChange.textColor = UIColor.yellow
-            cell.afterHoursChange.text = "N/A"
+            cell.afterHoursChange.text = "$0.00"
         }
         
         //Set remaining attributes. 

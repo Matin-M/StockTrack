@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		14ED30B47F0EC65B01E45355 /* Pods_StockTrack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B908F91E03C5DCC460BF74B1 /* Pods_StockTrack.framework */; };
+		9E0743F7259A8737001075EB /* MenuTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0743F6259A8737001075EB /* MenuTableView.swift */; };
 		9E0929BD2581CFCB005004A0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0929BC2581CFCB005004A0 /* AppDelegate.swift */; };
 		9E0929BF2581CFCB005004A0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0929BE2581CFCB005004A0 /* SceneDelegate.swift */; };
 		9E0929C42581CFCB005004A0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E0929C22581CFCB005004A0 /* Main.storyboard */; };
@@ -26,6 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9E0743F6259A8737001075EB /* MenuTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableView.swift; sourceTree = "<group>"; };
 		9E0929B92581CFCB005004A0 /* StockTrack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StockTrack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E0929BC2581CFCB005004A0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9E0929BE2581CFCB005004A0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 		9E0929B02581CFCB005004A0 = {
 			isa = PBXGroup;
 			children = (
+				9E738CFF259A7A1D00DD9F9F /* ViewControllers */,
 				9E210D032585ACAD00040B6D /* API */,
 				9E37AF6F258338E900FB9AEB /* CoreData */,
 				9E0929DF2581D79F005004A0 /* Images */,
@@ -101,16 +104,12 @@
 		9E0929BB2581CFCB005004A0 /* StockTrack */ = {
 			isa = PBXGroup;
 			children = (
-				9E0929DC2581D6C5005004A0 /* TickerCell.swift */,
 				9E0929BC2581CFCB005004A0 /* AppDelegate.swift */,
 				9E0929BE2581CFCB005004A0 /* SceneDelegate.swift */,
-				9E0929D82581D39E005004A0 /* TickerListView.swift */,
 				9E0929C22581CFCB005004A0 /* Main.storyboard */,
 				9E0929C82581CFCE005004A0 /* Assets.xcassets */,
 				9E0929CA2581CFCE005004A0 /* LaunchScreen.storyboard */,
 				9E0929CD2581CFCE005004A0 /* Info.plist */,
-				9E37AF7A2584958800FB9AEB /* NewsView.swift */,
-				9E37AF7D25849CD700FB9AEB /* TickerDetailView.swift */,
 			);
 			path = StockTrack;
 			sourceTree = "<group>";
@@ -140,6 +139,18 @@
 				9E37AF5B2582D76200FB9AEB /* TickerCoreData.xcdatamodeld */,
 			);
 			path = CoreData;
+			sourceTree = "<group>";
+		};
+		9E738CFF259A7A1D00DD9F9F /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				9E0929DC2581D6C5005004A0 /* TickerCell.swift */,
+				9E0929D82581D39E005004A0 /* TickerListView.swift */,
+				9E37AF7A2584958800FB9AEB /* NewsView.swift */,
+				9E37AF7D25849CD700FB9AEB /* TickerDetailView.swift */,
+				9E0743F6259A8737001075EB /* MenuTableView.swift */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -257,6 +268,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E0743F7259A8737001075EB /* MenuTableView.swift in Sources */,
 				9E0929D92581D39E005004A0 /* TickerListView.swift in Sources */,
 				9EF3BE092581E3720074A217 /* TickerLocal.swift in Sources */,
 				9E37AF5D2582D76200FB9AEB /* TickerCoreData.xcdatamodeld in Sources */,

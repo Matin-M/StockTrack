@@ -8,5 +8,6 @@ target 'StockTrack' do
   # Pods for StockTrack
   pod 'Charts'
   pod 'TinyConstraints'
+  pod 'SideMenu'
 
 end
