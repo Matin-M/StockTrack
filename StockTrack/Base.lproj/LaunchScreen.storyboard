@@ -28,27 +28,15 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version 1.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="npj-eY-Ss7">
-                                <rect key="frame" x="141" y="275" width="132" height="34"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemGray2Color"/>
                         <constraints>
                             <constraint firstItem="8w6-5R-EtS" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="103" id="2tF-mz-9KS"/>
-                            <constraint firstItem="npj-eY-Ss7" firstAttribute="top" secondItem="Os4-jW-wfw" secondAttribute="bottom" constant="8" symbolic="YES" id="A7A-O1-6xP"/>
-                            <constraint firstItem="8w6-5R-EtS" firstAttribute="top" secondItem="npj-eY-Ss7" secondAttribute="bottom" constant="207" id="Dng-GO-fiZ"/>
-                            <constraint firstItem="8w6-5R-EtS" firstAttribute="top" secondItem="npj-eY-Ss7" secondAttribute="bottom" constant="207" id="IXc-W4-2Vn"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="8w6-5R-EtS" secondAttribute="bottom" constant="199" id="OUf-Fw-rCw"/>
-                            <constraint firstItem="npj-eY-Ss7" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="141" id="XOG-3b-Ugt"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="8w6-5R-EtS" secondAttribute="trailing" constant="103" id="dgK-RJ-BnK"/>
                             <constraint firstItem="Os4-jW-wfw" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="206" id="fCC-ab-Nwu"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="npj-eY-Ss7" secondAttribute="trailing" constant="141" id="fc0-xN-2Lq"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Os4-jW-wfw" secondAttribute="trailing" constant="46" id="soC-BW-6gw"/>
-                            <constraint firstItem="npj-eY-Ss7" firstAttribute="top" secondItem="Os4-jW-wfw" secondAttribute="bottom" constant="8" symbolic="YES" id="tea-hO-XCY"/>
                             <constraint firstItem="Os4-jW-wfw" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="47" id="uGc-Oo-6RY"/>
                         </constraints>
                     </view>

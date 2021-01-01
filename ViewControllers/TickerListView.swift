@@ -9,7 +9,7 @@ import UIKit
 import CoreData
 import SideMenu
 
-class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSource, MenuControllerDelegate{
     
     var tickerModel: TickerManager?
     
@@ -24,8 +24,11 @@ class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSour
         tickerModel = TickerManager(managedObject: managedObjectContext)
         
         //Configure menu View Controller.
-        menu = SideMenuNavigationController(rootViewController: MenuTableView())
+        let sideMenuObject = MenuTableView()
+        sideMenuObject.delegate = self
+        menu = SideMenuNavigationController(rootViewController: sideMenuObject)
         menu?.leftSide = true
+        menu?.setNavigationBarHidden(true, animated: false)
         SideMenuManager.default.leftMenuNavigationController = menu
         SideMenuManager.default.addPanGestureToPresent(toView: self.view)
         
@@ -50,9 +53,26 @@ class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSour
         present(menu!, animated: true)
     }
     
+    func didSelectMenuItem(named: String) {
+        menu?.dismiss(animated: true, completion: {
+            if named == "Usage"{
+                
+            }else if named == "About" {
+                
+            }else if named == "Settings"{
+                
+            }
+        })
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //Return number of saved tickers.
         return tickerModel!.getCount()
+    }
+    
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        // Return false if you do not want the item to be re-orderable.
+        return true
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
