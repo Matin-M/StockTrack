@@ -10,13 +10,16 @@ import CoreData
 import SideMenu
 
 class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSource, MenuControllerDelegate{
-    
+    //CoreData and Model objects.
     var tickerModel: TickerManager?
-    
     let managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-
+    
+    //TickerListView UI Items.
     @IBOutlet weak var tickerTable: UITableView!
     var menu: SideMenuNavigationController?
+    
+    //Menu Views.
+    var settingsView: SettingsView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,10 +50,22 @@ class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         //Update tickers with data upon open.
         refreshTickers()
+        
+        //Declare Menu Subviews.
+        settingsView = SettingsView()
+        addChildMenuControllers()
     }
     
     @IBAction func didTapMenu(_ sender: Any) {
         present(menu!, animated: true)
+    }
+    
+    func addChildMenuControllers(){
+        addChild(settingsView)
+        view.addSubview(settingsView.view)
+        settingsView.view.frame = view.bounds
+        settingsView.didMove(toParent: self)
+        settingsView.view.isHidden = true
     }
     
     func didSelectMenuItem(named: String) {
@@ -60,7 +75,8 @@ class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSour
             }else if named == "About" {
                 
             }else if named == "Settings"{
-                
+                print("Showing settings view.")
+                self.settingsView?.view.isHidden = false
             }
         })
     }
