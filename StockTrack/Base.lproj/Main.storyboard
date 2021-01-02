@@ -17,9 +17,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ksa-Fr-3Gg">
+                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ksa-Fr-3Gg">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.30588235289999999" green="0.30588235289999999" blue="0.30588235289999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <color key="barTintColor" red="0.30588235289999999" green="0.30588235289999999" blue="0.30588235289999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <textAttributes key="titleTextAttributes">
@@ -31,15 +30,14 @@
                                             <imageReference key="image" image="arrowshape.turn.up.backward" catalog="system" symbolScale="large"/>
                                             <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <connections>
-                                                <action selector="back:" destination="DIi-jE-MNZ" id="hBg-Jf-XCv"/>
+                                                <action selector="back:" destination="F13-v6-z4b" id="GIw-r4-2Lw"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Usage" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K3e-Nm-TKT">
-                                <rect key="frame" x="169" y="7" width="77" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Usage" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ldg-go-DBj">
+                                <rect key="frame" x="146" y="7" width="123" height="30"/>
                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="25"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -48,6 +46,14 @@
                         <viewLayoutGuide key="safeArea" id="0r5-Aa-OVm"/>
                         <color key="backgroundColor" red="0.30588235289999999" green="0.30588235289999999" blue="0.30588235289999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Ksa-Fr-3Gg" firstAttribute="centerX" secondItem="Eiw-El-6qe" secondAttribute="centerX" id="0Kh-Kb-AZJ"/>
+                            <constraint firstItem="Ldg-go-DBj" firstAttribute="centerX" secondItem="Ksa-Fr-3Gg" secondAttribute="centerX" id="0jy-uj-dcl"/>
+                            <constraint firstItem="Ksa-Fr-3Gg" firstAttribute="top" secondItem="0r5-Aa-OVm" secondAttribute="top" id="7yg-4U-hIh"/>
+                            <constraint firstItem="Ldg-go-DBj" firstAttribute="centerY" secondItem="Ksa-Fr-3Gg" secondAttribute="centerY" id="D8W-h3-wny"/>
+                            <constraint firstItem="Ldg-go-DBj" firstAttribute="leading" secondItem="0r5-Aa-OVm" secondAttribute="leading" constant="146" id="GJi-VC-0Ak"/>
+                            <constraint firstItem="Ksa-Fr-3Gg" firstAttribute="leading" secondItem="0r5-Aa-OVm" secondAttribute="leading" id="tn8-hu-fbS"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7vK-QT-2YN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -62,9 +68,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U6i-UT-S3x">
+                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U6i-UT-S3x">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.30588235289999999" green="0.30588235289999999" blue="0.30588235289999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <color key="barTintColor" red="0.30588235289999999" green="0.30588235289999999" blue="0.30588235289999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <textAttributes key="titleTextAttributes">
@@ -76,15 +81,14 @@
                                             <imageReference key="image" image="arrowshape.turn.up.backward" catalog="system" symbolScale="large"/>
                                             <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <connections>
-                                                <action selector="back:" destination="DIi-jE-MNZ" id="80U-D0-4YC"/>
+                                                <action selector="back:" destination="Eq7-le-Ijs" id="Mgf-1t-nYa"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="About" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XDh-xz-hr4">
-                                <rect key="frame" x="170" y="7" width="75" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="About" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O71-g8-UUX">
+                                <rect key="frame" x="146" y="7" width="123" height="30"/>
                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="25"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -93,6 +97,14 @@
                         <viewLayoutGuide key="safeArea" id="cq6-DB-fNZ"/>
                         <color key="backgroundColor" red="0.30588235289999999" green="0.30588235289999999" blue="0.30588235289999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="O71-g8-UUX" firstAttribute="leading" secondItem="cq6-DB-fNZ" secondAttribute="leading" constant="146" id="9q2-uB-BFh"/>
+                            <constraint firstItem="O71-g8-UUX" firstAttribute="centerY" secondItem="U6i-UT-S3x" secondAttribute="centerY" id="PBa-rk-6TI"/>
+                            <constraint firstItem="U6i-UT-S3x" firstAttribute="leading" secondItem="cq6-DB-fNZ" secondAttribute="leading" id="Qs6-UD-BTz"/>
+                            <constraint firstItem="U6i-UT-S3x" firstAttribute="top" secondItem="cq6-DB-fNZ" secondAttribute="top" id="gmP-eW-RhO"/>
+                            <constraint firstItem="U6i-UT-S3x" firstAttribute="centerX" secondItem="AAG-av-Cbr" secondAttribute="centerX" id="lKY-Dq-QJU"/>
+                            <constraint firstItem="O71-g8-UUX" firstAttribute="centerX" secondItem="U6i-UT-S3x" secondAttribute="centerX" id="wGT-xA-KZ0"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bjA-yF-4sH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -107,9 +119,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="awP-6H-6GY">
+                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="awP-6H-6GY">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.30588235289999999" green="0.30588235289999999" blue="0.30588235289999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <color key="barTintColor" red="0.30588235289999999" green="0.30588235289999999" blue="0.30588235289999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <textAttributes key="titleTextAttributes">
@@ -133,9 +144,8 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Settings" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Ag-oD-c0p">
-                                <rect key="frame" x="156" y="7" width="103" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Settings" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TOP-Wy-ihY">
+                                <rect key="frame" x="146" y="7" width="123" height="30"/>
                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="25"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -144,11 +154,19 @@
                         <viewLayoutGuide key="safeArea" id="nhO-dS-b70"/>
                         <color key="backgroundColor" red="0.30588235289999999" green="0.30588235289999999" blue="0.30588235289999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="awP-6H-6GY" firstAttribute="leading" secondItem="nhO-dS-b70" secondAttribute="leading" id="2bx-yE-6nQ"/>
+                            <constraint firstItem="TOP-Wy-ihY" firstAttribute="leading" secondItem="nhO-dS-b70" secondAttribute="leading" constant="146" id="JRh-FQ-i9N"/>
+                            <constraint firstItem="awP-6H-6GY" firstAttribute="centerX" secondItem="n1l-Gu-9NU" secondAttribute="centerX" id="Qm5-fu-aD0"/>
+                            <constraint firstItem="awP-6H-6GY" firstAttribute="top" secondItem="nhO-dS-b70" secondAttribute="top" id="Qru-ja-7WX"/>
+                            <constraint firstItem="TOP-Wy-ihY" firstAttribute="centerX" secondItem="awP-6H-6GY" secondAttribute="centerX" id="RKX-bw-vvk"/>
+                            <constraint firstItem="TOP-Wy-ihY" firstAttribute="centerY" secondItem="awP-6H-6GY" secondAttribute="centerY" id="dfM-KC-drE"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="coJ-0V-85Y" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-786" y="-325"/>
+            <point key="canvasLocation" x="-786.95652173913049" y="-325.27173913043481"/>
         </scene>
         <!--Ticker List View-->
         <scene sceneID="w3t-aQ-2jf">
@@ -358,7 +376,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vwB-WG-R5e">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="44.333333333333336"/>
                                 <color key="backgroundColor" red="0.30588235289999999" green="0.30588235289999999" blue="0.30588235289999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <color key="barTintColor" red="0.30588235289999999" green="0.30588235289999999" blue="0.30588235289999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <textAttributes key="titleTextAttributes">
@@ -382,7 +400,7 @@
                                 </items>
                             </navigationBar>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rg2-uR-HFx">
-                                <rect key="frame" x="0.0" y="45" width="414" height="1955"/>
+                                <rect key="frame" x="0.0" y="45.333333333333371" width="414" height="1954.6666666666665"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RUE-UE-xAk">
                                         <rect key="frame" x="0.0" y="-9" width="414" height="1921"/>
@@ -637,7 +655,7 @@
                                 </constraints>
                             </scrollView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ticker" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bMc-y8-39m">
-                                <rect key="frame" x="83" y="8.0000000000000018" width="249" height="28.666666666666671"/>
+                                <rect key="frame" x="83" y="8" width="249" height="29"/>
                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="24"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
