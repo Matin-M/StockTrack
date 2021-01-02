@@ -9,7 +9,10 @@ import Foundation
 
 class FetchFinacialData{
     
-    //Data
+    //Delegate.
+    var delegate: APIErrorDelegate?
+    
+    //Retrieved data.
     var retrievedData: String?
     var retrievedDetails: String?
     var retrievedChart: String?
@@ -238,11 +241,13 @@ class FetchFinacialData{
     
     func handleClientError(error: Optional<Any>) -> Void{
         print("A client error occurred!")
+        delegate?.clientError()
     }
     
     func handleServerError(response: HTTPURLResponse) -> Void{
         //Caused when number of API requests exceeds daily quota.
         print("A server error occurred!")
+        delegate?.serverError()
     }
     
 }

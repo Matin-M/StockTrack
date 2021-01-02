@@ -9,7 +9,8 @@ import UIKit
 import CoreData
 import SideMenu
 
-class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSource, MenuControllerDelegate{
+class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSource, MenuControllerDelegate, APIErrorDelegate{
+    
     //CoreData and Model objects.
     var tickerModel: TickerManager?
     let managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -41,6 +42,11 @@ class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSour
         tickerTable.delegate = self
         tickerTable.dataSource = self
         
+        //Assign API delegate to self.
+        for ticker in tickerModel!.tickerList{
+            ticker.fetchFinancials.delegate = self
+        }
+        
         //Remove TableLines.
         self.tickerTable.separatorStyle = UITableViewCell.SeparatorStyle.none
         
@@ -60,6 +66,7 @@ class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSour
         aboutView = storyboard.instantiateViewController(withIdentifier: "AboutView")
     }
     
+    //Handle sidemenu interactions.
     @IBAction func didTapMenu(_ sender: Any) {
         present(menu!, animated: true)
     }
@@ -76,6 +83,20 @@ class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSour
         })
     }
     
+    //Handle API errors.
+    func clientError() {
+        let alert = UIAlertController(title: "Client Network Error!", message: "Failed attempt to fetch data. Make sure you are connected to the internet and try again.", preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func serverError() {
+        let alert = UIAlertController(title: "Server Error!", message: "Failed attempt to fetch data. The server is no longer accepting requests at the moment, please try again later.", preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    //Tableview delegate functions.
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //Return number of saved tickers.
         return tickerModel!.getCount()
