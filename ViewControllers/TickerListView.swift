@@ -19,7 +19,9 @@ class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSour
     var menu: SideMenuNavigationController?
     
     //Menu Views.
-    var settingsView: SettingsView!
+    var settingsView: UIViewController!
+    var aboutView: UIViewController!
+    var usageView: UIViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,31 +54,24 @@ class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSour
         refreshTickers()
         
         //Declare Menu Subviews.
-        settingsView = SettingsView()
-        addChildMenuControllers()
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        settingsView = storyboard.instantiateViewController(withIdentifier: "SettingsView")
+        usageView = storyboard.instantiateViewController(withIdentifier: "UsageView")
+        aboutView = storyboard.instantiateViewController(withIdentifier: "AboutView")
     }
     
     @IBAction func didTapMenu(_ sender: Any) {
         present(menu!, animated: true)
     }
     
-    func addChildMenuControllers(){
-        addChild(settingsView)
-        view.addSubview(settingsView.view)
-        settingsView.view.frame = view.bounds
-        settingsView.didMove(toParent: self)
-        settingsView.view.isHidden = true
-    }
-    
     func didSelectMenuItem(named: String) {
         menu?.dismiss(animated: true, completion: {
             if named == "Usage"{
-                
+                self.present(self.usageView, animated: true, completion: nil)
             }else if named == "About" {
-                
+                self.present(self.aboutView, animated: true, completion: nil)
             }else if named == "Settings"{
-                print("Showing settings view.")
-                self.settingsView?.view.isHidden = false
+                self.present(self.settingsView, animated: true, completion: nil)
             }
         })
     }
