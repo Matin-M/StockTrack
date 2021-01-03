@@ -16,11 +16,15 @@ class TickerDetailView: UIViewController, ChartViewDelegate {
     var fetchFinancials: FetchFinacialData!
     var ticker: TickerLocal?
 
-    //UIKit elements.
+    //UIViews.
     @IBOutlet weak var rangeSelector: UISegmentedControl!
     @IBOutlet weak var lineChartView: UIView!
+    @IBOutlet weak var earningsView: UIView!
+    @IBOutlet weak var earningsBarChartView: UIView!
     @IBOutlet weak var tickerLabel: UILabel!
     @IBOutlet weak var statsView: UIView!
+    
+    //Graphs.
     lazy var stockPriceLineChart: LineChartView = {
         let chartView = LineChartView()
         //Set chart properties.
@@ -85,6 +89,14 @@ class TickerDetailView: UIViewController, ChartViewDelegate {
         statsView.backgroundColor = .gray
         statsView.frame = CGRect(x: statsView.frame.origin.x, y: statsView.frame.origin.y, width: statsView.frame.width, height: statsView.frame.height)
         statsView.layer.cornerRadius = 8
+        
+        //Configure earningsView.
+        earningsView.backgroundColor = .gray
+        earningsView.frame = CGRect(x: earningsView.frame.origin.x, y: earningsView.frame.origin.y, width: earningsView.frame.width, height: earningsView.frame.height)
+        earningsView.layer.cornerRadius = 8
+        earningsBarChartView.backgroundColor = UIColor.gray
+        
+        //Configure barChart.
         
         //Set values for stats.
         setStats()

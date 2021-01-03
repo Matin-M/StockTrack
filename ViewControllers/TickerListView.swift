@@ -42,11 +42,6 @@ class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSour
         tickerTable.delegate = self
         tickerTable.dataSource = self
         
-        //Assign API delegate to self.
-        for ticker in tickerModel!.tickerList{
-            ticker.fetchFinancials.delegate = self
-        }
-        
         //Remove TableLines.
         self.tickerTable.separatorStyle = UITableViewCell.SeparatorStyle.none
         
@@ -58,6 +53,13 @@ class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         //Update tickers with data upon open.
         refreshTickers()
+        
+        //Assign API delegate to self.
+        for ticker in tickerModel!.tickerList{
+            if ticker.fetchFinancials.delegate != nil{
+                ticker.fetchFinancials.delegate = self
+            }
+        }
         
         //Declare Menu Subviews.
         let storyboard = UIStoryboard(name: "Main", bundle: nil)

@@ -431,8 +431,8 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="52 Week Change" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hF6-uc-yQV">
-                                                        <rect key="frame" x="8" y="37" width="131" height="21"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="52-Week Range" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hF6-uc-yQV">
+                                                        <rect key="frame" x="8" y="37.000000000000114" width="122" height="21"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
@@ -625,8 +625,22 @@
                                                 <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ybg-k8-dYA">
-                                                <rect key="frame" x="0.0" y="771" width="414" height="305"/>
+                                                <rect key="frame" x="8" y="746" width="398" height="383"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Earnings History" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xlp-E5-F7W">
+                                                        <rect key="frame" x="121" y="8" width="156" height="24"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pz3-Na-NBG">
+                                                        <rect key="frame" x="0.0" y="40" width="398" height="224"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    </view>
+                                                </subviews>
                                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                         </subviews>
@@ -686,7 +700,9 @@
                         <outlet property="beta" destination="hMX-D5-eK1" id="wib-EN-QDW"/>
                         <outlet property="bid" destination="sXA-fe-atg" id="J9I-SK-edq"/>
                         <outlet property="divYield" destination="ujk-qf-nS7" id="y6o-Gk-egL"/>
+                        <outlet property="earningsBarChartView" destination="Pz3-Na-NBG" id="H1C-ym-zJD"/>
                         <outlet property="earningsDate" destination="mqm-6F-ShQ" id="A7N-ZW-Nyw"/>
+                        <outlet property="earningsView" destination="Ybg-k8-dYA" id="yAe-4h-SK4"/>
                         <outlet property="eps" destination="k0X-Sy-RGO" id="EnP-Ah-geV"/>
                         <outlet property="forwardPE" destination="zCe-md-sCk" id="ai7-rd-d8M"/>
                         <outlet property="lineChartView" destination="6hf-pe-MbB" id="Mxi-nw-NWI"/>
