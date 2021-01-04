@@ -24,7 +24,7 @@ class TickerDetailView: UIViewController, ChartViewDelegate {
     @IBOutlet weak var tickerLabel: UILabel!
     @IBOutlet weak var statsView: UIView!
     
-    //Graphs.
+    //Linec
     lazy var stockPriceLineChart: LineChartView = {
         let chartView = LineChartView()
         //Set chart properties.
@@ -42,6 +42,38 @@ class TickerDetailView: UIViewController, ChartViewDelegate {
         chartView.xAxis.axisLineColor = .white
         chartView.animate(xAxisDuration: 2)
         return chartView
+    }()
+    lazy var earningsChart: BarChartView = {
+        let chart = BarChartView()
+        
+        let legend = chart.legend
+        legend.enabled = true
+        legend.horizontalAlignment = .right
+        legend.verticalAlignment = .top
+        legend.orientation = .vertical
+        legend.drawInside = true
+        legend.yOffset = 10.0;
+        legend.xOffset = 10.0;
+        legend.yEntrySpace = 0.0;
+        
+        let xaxis = chart.xAxis
+        xaxis.valueFormatter = axisFormatDelegate
+        xaxis.drawGridLinesEnabled = true
+        xaxis.labelPosition = .bottom
+        xaxis.centerAxisLabelsEnabled = true
+        xaxis.valueFormatter = IndexAxisValueFormatter(values: ["Q1", "Q2", "Q3", "Q4"])
+        xaxis.granularity = 1
+        
+        let leftAxisFormatter = NumberFormatter()
+        leftAxisFormatter.maximumFractionDigits = 1
+    
+        let yaxis = chart.leftAxis
+        yaxis.spaceTop = 0.35
+        yaxis.axisMinimum = 0
+        yaxis.drawGridLinesEnabled = false
+        chart.rightAxis.enabled = false
+        
+        return chart
     }()
     
     //Stats labels.
@@ -62,6 +94,8 @@ class TickerDetailView: UIViewController, ChartViewDelegate {
     
     //Datasets.
     var priceData: [ChartDataEntry] = []
+    weak var axisFormatDelegate: IAxisValueFormatter?
+    //TEST DATA!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -97,6 +131,12 @@ class TickerDetailView: UIViewController, ChartViewDelegate {
         earningsBarChartView.backgroundColor = UIColor.gray
         
         //Configure barChart.
+        earningsBarChartView.addSubview(earningsChart)
+        earningsChart.centerInSuperview()
+        earningsChart.width(to: earningsBarChartView)
+        earningsChart.height(to: earningsBarChartView)
+        earningsChart.delegate = self
+        setEarningsChart()
         
         //Set values for stats.
         setStats()
@@ -123,6 +163,59 @@ class TickerDetailView: UIViewController, ChartViewDelegate {
         marketCap.text = fetchFinancials.getQuoteData(toFind: "marketCap")
         forwardPE.text = fetchFinancials.getQuoteData(toFind: "forwardPE")
         trailingPE.text = fetchFinancials.getQuoteData(toFind: "trailingPE")
+    }
+    
+    func setEarningsChart() -> Void{
+        //Test data.
+        let quarters: [Double] = [1,2,3,4]
+        let quarterData: (actual: [Double], expected: [Double]) = ([23,12,5,12],[7,43,12,1])
+        
+        var actualData: [BarChartDataEntry] = []
+        var expectedData: [BarChartDataEntry] = []
+        
+        //Create datasets.
+        for i in 0..<quarters.count {
+            let actualEntry = BarChartDataEntry(x: quarters[i] , y: quarterData.actual[i])
+            actualData.append(actualEntry)
+
+            let expectedEntry = BarChartDataEntry(x: quarters[i] , y: quarterData.expected[i])
+            expectedData.append(expectedEntry)
+        }
+        
+        //Assign datasets.
+        let actualDataSet = BarChartDataSet(entries: actualData, label: "Actual EPS")
+        let expectedDataSet = BarChartDataSet(entries: expectedData, label: "Expected EPS")
+        let dataSets: [BarChartDataSet] = [actualDataSet, expectedDataSet]
+        
+        //Set colors.
+        actualDataSet.colors = [UIColor(red: 255/255, green: 0/255, blue: 0/255, alpha: 1)]
+        expectedDataSet.colors = [UIColor(red: 0/255, green: 255/255, blue: 0/255, alpha: 1)]
+        //Set chartdata.
+        let chartData = BarChartData(dataSets: dataSets)
+        
+        //Configure spacings.
+        let groupSpace = 0.3
+        let barSpace = 0.05
+        let barWidth = 0.3
+        let groupCount = quarters.count
+        let startYear = 0
+        
+        //Other configurations.
+        chartData.barWidth = barWidth;
+        earningsChart.xAxis.axisMinimum = Double(startYear)
+        let gg = chartData.groupWidth(groupSpace: groupSpace, barSpace: barSpace)
+        print("Groupspace: \(gg)")
+        earningsChart.xAxis.axisMaximum = Double(startYear) + gg * Double(groupCount)
+
+        chartData.groupBars(fromX: Double(startYear), groupSpace: groupSpace, barSpace: barSpace)
+        earningsChart.notifyDataSetChanged()
+        earningsChart.data = chartData
+
+        //background color
+        earningsChart.backgroundColor = UIColor.systemGray
+
+        //chart animation
+        earningsChart.animate(xAxisDuration: 1.5, yAxisDuration: 1.5, easingOption: .linear)
     }
     
     func setPriceData() -> Void{
