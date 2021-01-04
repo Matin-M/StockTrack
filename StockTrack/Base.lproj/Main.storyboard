@@ -413,16 +413,16 @@
                                                 <rect key="frame" x="8" y="270" width="398" height="32"/>
                                                 <segments>
                                                     <segment title="1 Day"/>
-                                                    <segment title="1 Week"/>
+                                                    <segment title="5 Day"/>
                                                     <segment title="3 Month"/>
-                                                    <segment title="YTD"/>
+                                                    <segment title="MAX"/>
                                                 </segments>
                                                 <connections>
                                                     <action selector="rangeAction:" destination="ejR-N4-nvA" eventType="valueChanged" id="JmD-ne-sce"/>
                                                 </connections>
                                             </segmentedControl>
                                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ybg-k8-dYA">
-                                                <rect key="frame" x="8" y="759" width="398" height="383"/>
+                                                <rect key="frame" x="8" y="759" width="398" height="271"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Earnings History" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xlp-E5-F7W">
@@ -432,7 +432,7 @@
                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pz3-Na-NBG">
+                                                    <view userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pz3-Na-NBG">
                                                         <rect key="frame" x="0.0" y="40" width="398" height="224"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -728,7 +728,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2dk-uM-jgg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="xFM-yb-Dit" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="886.95652173913049" y="376.63043478260875"/>
+            <point key="canvasLocation" x="425" y="959"/>
         </scene>
         <!--News View-->
         <scene sceneID="02v-L1-cTL">
@@ -805,7 +805,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eme-1y-Zj7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="yyn-FL-LOd" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="886.95652173913049" y="-854.34782608695662"/>
+            <point key="canvasLocation" x="823" y="-325"/>
         </scene>
     </scenes>
     <resources>

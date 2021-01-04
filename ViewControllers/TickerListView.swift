@@ -54,13 +54,6 @@ class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSour
         //Update tickers with data upon open.
         refreshTickers()
         
-        //Assign API delegate to self.
-        for ticker in tickerModel!.tickerList{
-            if ticker.fetchFinancials.delegate != nil{
-                ticker.fetchFinancials.delegate = self
-            }
-        }
-        
         //Declare Menu Subviews.
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         settingsView = storyboard.instantiateViewController(withIdentifier: "SettingsView")
@@ -87,12 +80,14 @@ class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     //Handle API errors.
     func clientError() {
+        print("Client Error!")
         let alert = UIAlertController(title: "Client Network Error!", message: "Failed attempt to fetch data. Make sure you are connected to the internet and try again.", preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
     
     func serverError() {
+        print("Server Error!")
         let alert = UIAlertController(title: "Server Error!", message: "Failed attempt to fetch data. The server is no longer accepting requests at the moment, please try again later.", preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
@@ -119,30 +114,32 @@ class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSour
         cell.tickerLabel.text = ticker.tickerStr
         cell.backgroundColor = UIColor.clear
         
+        //Cell variables.
+        let changeFloat = Float(ticker.percentChange!)
+        let changeFormatted = String(format: "%.2f", changeFloat as! CVarArg)
+        let afterChangeFloat = Float(ticker.afterHoursChange!)
+        let afterChangeFormatted = String(format: "%.2f", afterChangeFloat as! CVarArg)
+        
         //Change color of %change labels to reflect gains/losses.
         if(ticker.percentChange!.contains("-") == false){
             cell.percentChange.textColor = UIColor.green
-            let index = ticker.percentChange!.index(ticker.percentChange!.startIndex, offsetBy: 5)
-            cell.percentChange.text = "↑\(ticker.percentChange![..<index])%"
+            cell.percentChange.text = "↑\(changeFormatted)%"
         }else{
-            let index = ticker.percentChange!.index(ticker.percentChange!.startIndex, offsetBy: 5)
             cell.percentChange.textColor = UIColor.red
-            cell.percentChange.text = "↓\(ticker.percentChange![..<index])%"
+            cell.percentChange.text = "↓\(changeFormatted)%"
         }
         
         if(ticker.afterHoursChange != nil && ticker.afterHoursChange != "0.0"){
             if(ticker.afterHoursChange!.contains("-") == false){
-                let index = ticker.afterHoursChange!.index(ticker.afterHoursChange!.startIndex, offsetBy: 5)
                 cell.afterHoursChange.textColor = UIColor.green
-                cell.afterHoursChange.text = "↑\(ticker.afterHoursChange![..<index])%"
+                cell.afterHoursChange.text = "↑\(afterChangeFormatted)%"
             }else{
-                let index = ticker.afterHoursChange!.index(ticker.afterHoursChange!.startIndex, offsetBy: 5)
                 cell.afterHoursChange.textColor = UIColor.red
-                cell.afterHoursChange.text = "↓\(ticker.afterHoursChange![..<index])%"
+                cell.afterHoursChange.text = "↓\(afterChangeFormatted)%"
             }
         }else{
             cell.afterHoursChange.textColor = UIColor.yellow
-            cell.afterHoursChange.text = "$0.00"
+            cell.afterHoursChange.text = "Δ = 0.00%"
         }
         
         //Set remaining attributes. 
@@ -203,7 +200,9 @@ class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSour
             tickerFromList.currentPrice = fetch.getQuoteData(toFind: "regularMarketPrice")
             //Set FetchFinancialData object.
             tickerFromList.fetchFinancials = fetch
+            tickerFromList.fetchFinancials.delegate = self
         }
+        
     }
     
     //Refresh watchlist.
