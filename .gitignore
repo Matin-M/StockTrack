@@ -1,6 +1,9 @@
 # Xcode
 #
 
+## Mac OS Directives.
+.DS_Store
+
 ## User settings
 xcuserdata/
 

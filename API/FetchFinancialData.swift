@@ -18,13 +18,20 @@ class FetchFinacialData{
     var retrievedChart: String?
     
     //API key and headers.
-    let API_KEY: String = "d1207125c7msh17c2c423fd6eb41p12ce5ajsna5cdc9a75064"
+    let API_KEY: String = "[REDACTED]"
     var headers: [String:String]
     var ticker: String?
     
     //Database selector.
     enum Databases: CaseIterable {
         case data, details, chart
+    }
+    
+    //API Errors.
+    enum NetworkError: Error {
+        case ServerError
+        case ClientError
+        case OtherError
     }
     
     //Init using ticker symbol.
@@ -129,7 +136,7 @@ class FetchFinacialData{
             let offset = str.index(str.startIndex, offsetBy: i)
             if(str[offset] == ","){
                 count += 1
-                timeStamps.append(Double(result)!)
+                timeStamps.append(Double(result) ?? 0.0)
                 result = ""
             }else{
                 result.append(str[offset])
@@ -141,7 +148,7 @@ class FetchFinacialData{
         }
         
         //Find price values.
-        if let range: Range<String.Index> = str.range(of: "high") {
+        if let range: Range<String.Index> = str.range(of: "open") {
             index = str.distance(from: str.startIndex, to: range.lowerBound)
             print("index: ", index)
         }
@@ -158,7 +165,7 @@ class FetchFinacialData{
             let offset = str.index(str.startIndex, offsetBy: i)
             if(str[offset] == ","){
                 count += 1
-                values.append(Double(result)!)
+                values.append(Double(result) ?? 0.0)
                 result = ""
             }else{
                 result.append(str[offset])
@@ -168,7 +175,6 @@ class FetchFinacialData{
                 break
             }
         }
-
         return (timeStamps,values)
     }
  
@@ -190,7 +196,6 @@ class FetchFinacialData{
     
     //Make a RESTful API request to yahoo finance.
     func requestData(request: NSMutableURLRequest) -> String {
-
         request.httpMethod = "GET"
         request.allHTTPHeaderFields = headers
 
@@ -203,29 +208,38 @@ class FetchFinacialData{
             if (error != nil) {
                 print("Error fetching data")
             } else {
-                //Check error flag.
-                if error != nil {
+                //Handle any errors.
+                do{
+                    //Check error flag.
+                    if error != nil {
+                        throw NetworkError.ClientError
+                    }
+                    
+                    //Validate httpResponse feedback.
+                    guard let httpResponse = response as? HTTPURLResponse,
+                          (200...299).contains(httpResponse.statusCode) else {
+                        throw NetworkError.ServerError
+                    }
+                    
+                    //Check response MIME adherance to JSON.
+                    guard let mime = response?.mimeType, mime == "application/json" else {
+                        print("Wrong MIME type!")
+                            throw NetworkError.OtherError
+                    }
+                    
+                    //Deserialize JSON object: NOT WORKING
+                    //jsonData = try? JSONSerialization.jsonObject(with: data!, options: [])
+                    if let data = data, let dataString = String(data: data, encoding: .utf8) {
+                       jsonData = dataString
+                        }
+
+                }catch NetworkError.ClientError{
                     self.handleClientError(error: error)
-                    return
-                }
-                
-                //Validate httpResponse feedback.
-                guard let httpResponse = response as? HTTPURLResponse,
-                      (200...299).contains(httpResponse.statusCode) else {
+                }catch NetworkError.ServerError{
                     self.handleServerError(response: response! as! HTTPURLResponse)
-                    return
-                }
-                
-                //Check response MIME adherance to JSON.
-                guard let mime = response?.mimeType, mime == "application/json" else {
-                    print("Wrong MIME type!")
-                    return
-                }
-                
-                //Deserialize JSON object: NOT WORKING
-                //jsonData = try? JSONSerialization.jsonObject(with: data!, options: [])
-                if let data = data, let dataString = String(data: data, encoding: .utf8) {
-                   jsonData = dataString
+                }catch NetworkError.OtherError{
+                    print("Other error occurred!")
+                }catch{
                 }
             }
             //Signal semaphore.
@@ -241,13 +255,17 @@ class FetchFinacialData{
     
     func handleClientError(error: Optional<Any>) -> Void{
         print("A client error occurred!")
-        delegate?.clientError()
+        DispatchQueue.main.async{
+            self.delegate?.clientError()
+        }
+        
     }
     
     func handleServerError(response: HTTPURLResponse) -> Void{
-        //Caused when number of API requests exceeds daily quota.
         print("A server error occurred!")
-        delegate?.serverError()
+        DispatchQueue.main.async{
+            self.delegate?.serverError()
+        }
     }
     
 }

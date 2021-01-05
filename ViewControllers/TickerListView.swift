@@ -78,22 +78,29 @@ class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSour
         })
     }
     
-    //Handle API errors.
+    //MARK: - API Error handling.
     func clientError() {
-        print("Client Error!")
-        let alert = UIAlertController(title: "Client Network Error!", message: "Failed attempt to fetch data. Make sure you are connected to the internet and try again.", preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
+        let alertController = UIAlertController(title: "ERROR 408: Request Timeout", message: "Failed to fetch data. Make sure you are connected to the internet and try again.", preferredStyle: UIAlertController.Style.alert)
+        let cancel = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
+        alertController.addAction(cancel)
+
+        if self.presentedViewController == nil {
+            self.present(alertController, animated: true, completion: nil)
+        }
     }
     
     func serverError() {
-        print("Server Error!")
-        let alert = UIAlertController(title: "Server Error!", message: "Failed attempt to fetch data. The server is no longer accepting requests at the moment, please try again later.", preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
+        
+        let alertController = UIAlertController(title: "ERROR 408: Request Timeout", message: "Failed to fetch data. The server is no longer accepting requests at the moment, please try again later.", preferredStyle: UIAlertController.Style.alert)
+        let cancel = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
+        alertController.addAction(cancel)
+
+        if self.presentedViewController == nil {
+            self.present(alertController, animated: true, completion: nil)
+        }
     }
     
-    //Tableview delegate functions.
+    //MARK: - TableView delegate functions.
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //Return number of saved tickers.
         return tickerModel!.getCount()
@@ -115,13 +122,11 @@ class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSour
         cell.backgroundColor = UIColor.clear
         
         //Cell variables.
-        let changeFloat = Float(ticker.percentChange!)
-        let changeFormatted = String(format: "%.2f", changeFloat as! CVarArg)
-        let afterChangeFloat = Float(ticker.afterHoursChange!)
-        let afterChangeFormatted = String(format: "%.2f", afterChangeFloat as! CVarArg)
+        let changeFloat = Float(ticker.percentChange ?? "0.0")
+        let changeFormatted = String(format: "%.2f", changeFloat!)
         
         //Change color of %change labels to reflect gains/losses.
-        if(ticker.percentChange!.contains("-") == false){
+        if(ticker.percentChange?.contains("-") == false){
             cell.percentChange.textColor = UIColor.green
             cell.percentChange.text = "↑\(changeFormatted)%"
         }else{
@@ -130,6 +135,9 @@ class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
         
         if(ticker.afterHoursChange != nil && ticker.afterHoursChange != "0.0"){
+            let afterChangeFloat = Float(ticker.afterHoursChange!)
+            let afterChangeFormatted = String(format: "%.2f", afterChangeFloat!)
+            
             if(ticker.afterHoursChange!.contains("-") == false){
                 cell.afterHoursChange.textColor = UIColor.green
                 cell.afterHoursChange.text = "↑\(afterChangeFormatted)%"
@@ -145,7 +153,7 @@ class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSour
         //Set remaining attributes. 
         cell.companyName.text = ticker.companyName
         cell.volume.text = ticker.volume
-        cell.currentPrice.text = "$\(ticker.currentPrice!)"
+        cell.currentPrice.text = "$\(ticker.currentPrice ?? "Error")"
         return cell
     }
     
@@ -174,10 +182,28 @@ class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSour
             }
         //Add "Add" Action.
         let addAction = UIAlertAction(title: "Add", style: .default, handler: { [self] alert -> Void in
-                let firstTextField = alertController.textFields![0] as UITextField
-                //Add ticker object w/ textfield str.
-                _ = tickerModel!.addTickerObject(tickerStr: firstTextField.text!)
-                tickerTable.reloadData()
+            let firstTextField = alertController.textFields![0] as UITextField
+            //Add ticker object w/ textfield str.
+            let addedTickerObj = tickerModel!.addTickerObject(tickerStr: firstTextField.text!)
+            let fetch = FetchFinacialData(ticker: addedTickerObj.tickerStr!)
+            addedTickerObj.fetchFinancials = fetch
+            addedTickerObj.fetchFinancials.delegate = self
+            fetch.fetchStockQuote()
+            
+            if((fetch.extractData(data: FetchFinacialData.Databases.data, toFind: "result", delimiter: ",", skipAmnt: 2)) == "[]"){
+                print("Not Found!")
+                let alert = UIAlertController(title: "ERROR 404: Ticker Not Found", message: "Failed to fetch data. The ticker symbol you entered is either invalid or does not exist.", preferredStyle: UIAlertController.Style.alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
+            
+            addedTickerObj.percentChange = fetch.getQuoteData(toFind: "regularMarketChangePercent")
+            addedTickerObj.afterHoursChange = fetch.getQuoteData(toFind: "postMarketChangePercent")
+            addedTickerObj.companyName = fetch.getQuoteData(toFind: "displayName")?.replacingOccurrences(of: "\"", with: "", options: NSString.CompareOptions.literal, range: nil)
+            addedTickerObj.volume = fetch.getQuoteData(toFind: "regularMarketVolume")
+            addedTickerObj.currentPrice = fetch.getQuoteData(toFind: "regularMarketPrice")
+            //Set FetchFinancialData object.
+            tickerTable.reloadData()
         })
         //Add "Cancel" Action.
         let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: { (action : UIAlertAction!) -> Void in })
@@ -192,6 +218,8 @@ class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSour
         for tickerFromList in tickerModel!.tickerList{
             //Set stats.
             let fetch = FetchFinacialData(ticker: tickerFromList.tickerStr!)
+            tickerFromList.fetchFinancials = fetch
+            tickerFromList.fetchFinancials.delegate = self
             fetch.fetchStockQuote()
             tickerFromList.percentChange = fetch.getQuoteData(toFind: "regularMarketChangePercent")
             tickerFromList.afterHoursChange = fetch.getQuoteData(toFind: "postMarketChangePercent")
@@ -199,8 +227,6 @@ class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSour
             tickerFromList.volume = fetch.getQuoteData(toFind: "regularMarketVolume")
             tickerFromList.currentPrice = fetch.getQuoteData(toFind: "regularMarketPrice")
             //Set FetchFinancialData object.
-            tickerFromList.fetchFinancials = fetch
-            tickerFromList.fetchFinancials.delegate = self
         }
         
     }
