@@ -18,6 +18,7 @@ class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSour
     //TickerListView UI Items.
     @IBOutlet weak var tickerTable: UITableView!
     var menu: SideMenuNavigationController?
+    var refreshControl: UIRefreshControl!
     
     //Menu Views.
     var settingsView: UIViewController!
@@ -42,6 +43,17 @@ class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSour
         tickerTable.delegate = self
         tickerTable.dataSource = self
         
+        //Assign refresh control, if above iOS 10.0.
+        refreshControl = UIRefreshControl()
+        if #available(iOS 10.0, *){
+            tickerTable.refreshControl = refreshControl
+        }else{
+            tickerTable.addSubview(refreshControl)
+        }
+        refreshControl.tintColor = UIColor(red:0.17, green:0.17, blue:0.17, alpha:1.0)
+        refreshControl.attributedTitle = NSAttributedString(string: "Fetching Data...")
+        refreshControl.addTarget(self, action: #selector(refreshTickerData(_:)), for: .valueChanged)
+        
         //Remove TableLines.
         self.tickerTable.separatorStyle = UITableViewCell.SeparatorStyle.none
         
@@ -59,6 +71,12 @@ class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSour
         settingsView = storyboard.instantiateViewController(withIdentifier: "SettingsView")
         usageView = storyboard.instantiateViewController(withIdentifier: "UsageView")
         aboutView = storyboard.instantiateViewController(withIdentifier: "AboutView")
+    }
+    
+    @objc private func refreshTickerData(_ sender: Any) {
+        refreshTickers()
+        tickerTable.reloadData()
+        refreshControl.endRefreshing()
     }
     
     //Handle sidemenu interactions.
@@ -80,7 +98,7 @@ class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     //MARK: - API Error handling.
     func clientError() {
-        let alertController = UIAlertController(title: "ERROR 408: Request Timeout", message: "Failed to fetch data. Make sure you are connected to the internet and try again.", preferredStyle: UIAlertController.Style.alert)
+        let alertController = UIAlertController(title: "Request Timeout", message: "Failed to fetch data. Make sure you are connected to the internet and try again.", preferredStyle: UIAlertController.Style.alert)
         let cancel = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
         alertController.addAction(cancel)
 
@@ -147,7 +165,7 @@ class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSour
             }
         }else{
             cell.afterHoursChange.textColor = UIColor.yellow
-            cell.afterHoursChange.text = "Δ = 0.00%"
+            cell.afterHoursChange.text = "0.00%"
         }
         
         //Set remaining attributes. 
@@ -226,15 +244,8 @@ class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSour
             tickerFromList.companyName = fetch.getQuoteData(toFind: "displayName")?.replacingOccurrences(of: "\"", with: "", options: NSString.CompareOptions.literal, range: nil)
             tickerFromList.volume = fetch.getQuoteData(toFind: "regularMarketVolume")
             tickerFromList.currentPrice = fetch.getQuoteData(toFind: "regularMarketPrice")
-            //Set FetchFinancialData object.
         }
         
-    }
-    
-    //Refresh watchlist.
-    @IBAction func refresh(_ sender: Any) {
-        refreshTickers()
-        tickerTable.reloadData()
     }
     
     //Send stock details to detailView.
