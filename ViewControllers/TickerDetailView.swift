@@ -95,7 +95,6 @@ class TickerDetailView: UIViewController, ChartViewDelegate {
     //Datasets.
     var priceData: [ChartDataEntry] = []
     weak var axisFormatDelegate: IAxisValueFormatter?
-    //TEST DATA!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -249,11 +248,11 @@ class TickerDetailView: UIViewController, ChartViewDelegate {
         if(range == "1 Day"){
             fetchFinancials.fetchStockChart(interval: "5m", range: "1d")
         }else if(range == "5 Day"){
-            fetchFinancials.fetchStockChart(interval: "1d", range: "1wk")
+            fetchFinancials.fetchStockChart(interval: "1d", range: "5d")
         }else if(range == "3 Month"){
             fetchFinancials.fetchStockChart(interval: "1d", range: "3mo")
         }else{
-            fetchFinancials.fetchStockChart(interval: "1wk", range: "ytd")
+            fetchFinancials.fetchStockChart(interval: "1mo", range: "max")
         }
         setPriceData()
         stockPriceLineChart.notifyDataSetChanged()
