@@ -47,32 +47,6 @@ class FetchFinacialData{
     
     //Parse JSON data. NOTE: retrievedData is not JSON compliant.
     func getQuoteData(toFind: String) -> String? {
-        let str = retrievedData!
-        var index: Int = 0
-
-        if let range: Range<String.Index> = str.range(of: toFind) {
-            index = str.distance(from: str.startIndex, to: range.lowerBound)
-            print("index: ", index)
-        }
-        else {
-            return nil
-        }
-
-        var i = index+toFind.count+2
-        var result: String = ""
-
-        while(true){
-            let offset = str.index(str.startIndex, offsetBy: i)
-            if(str[offset] == ","){
-                break
-            }else{
-                result.append(str[offset])
-            }
-            i+=1
-        }
-
-        print(result)
-        
         return extractData(data: Databases.data, toFind: toFind, delimiter: ",", skipAmnt: 2)
     }
     
@@ -90,7 +64,6 @@ class FetchFinacialData{
         var index: Int = 0
         if let range: Range<String.Index> = str.range(of: toFind) {
             index = str.distance(from: str.startIndex, to: range.lowerBound)
-            print("index: ", index)
         }
         else {
             return nil
@@ -108,20 +81,17 @@ class FetchFinacialData{
             }
             i+=1
         }
-
-        print(result)
         
         return result
     }
     
-    func getChartData() -> (x: [Double],y: [Double])?{
+    func getChartData() -> (x: [Double], y: [Double])?{
         let str = retrievedChart!
         var index: Int = 0
 
         //Find timestamps.
         if let range: Range<String.Index> = str.range(of: "timestamp") {
             index = str.distance(from: str.startIndex, to: range.lowerBound)
-            print("index: ", index)
         }
         else {
             return nil
@@ -129,13 +99,11 @@ class FetchFinacialData{
 
         var i = index+12
         var result: String = ""
-        var count: Int = 0
         var timeStamps: [Double] = []
         
         while(true){
             let offset = str.index(str.startIndex, offsetBy: i)
             if(str[offset] == ","){
-                count += 1
                 timeStamps.append(Double(result) ?? 0.0)
                 result = ""
             }else{
@@ -150,7 +118,6 @@ class FetchFinacialData{
         //Find price values.
         if let range: Range<String.Index> = str.range(of: "open") {
             index = str.distance(from: str.startIndex, to: range.lowerBound)
-            print("index: ", index)
         }
         else {
             return nil
@@ -158,13 +125,11 @@ class FetchFinacialData{
         
         i = index+7
         result = ""
-        count = 0
         var values: [Double] = []
         
         while(true){
             let offset = str.index(str.startIndex, offsetBy: i)
             if(str[offset] == ","){
-                count += 1
                 values.append(Double(result) ?? 0.0)
                 result = ""
             }else{
@@ -176,6 +141,64 @@ class FetchFinacialData{
             }
         }
         return (timeStamps,values)
+    }
+    
+    func getEarningsData() -> (actual: [Double], expected: [Double])?{
+        let str = retrievedDetails!
+        var index: Int = 0
+
+        //Find timestamps.
+        if let range: Range<String.Index> = str.range(of: "earningsChart") {
+            index = str.distance(from: str.startIndex, to: range.lowerBound)
+        }
+        else {
+            return nil
+        }
+        
+        print(index)
+        
+        var i = index+62
+        var result: String = ""
+        var count = 0
+        var actual: [Double] = []
+        //Parse Data.
+        while(true){
+            let offset = str.index(str.startIndex, offsetBy: i)
+            if(str[offset] == ","){
+                actual.append(Double(result) ?? 0.0)
+                result = ""
+                i += 86
+                count += 1
+            }else{
+                result.append(str[offset])
+                i+=1
+            }
+            if(count == 4){
+                break
+            }
+        }
+        
+        i = index+99
+        result = ""
+        count = 0
+        var expected: [Double] = []
+        //Parse Data.
+        while(true){
+            let offset = str.index(str.startIndex, offsetBy: i)
+            if(str[offset] == ","){
+                expected.append(Double(result) ?? 0.0)
+                result = ""
+                i += 86
+                count += 1
+            }else{
+                result.append(str[offset])
+                i+=1
+            }
+            if(count == 4){
+                break
+            }
+        }
+        return (actual,expected)
     }
  
     

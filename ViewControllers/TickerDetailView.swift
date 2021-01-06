@@ -61,7 +61,7 @@ class TickerDetailView: UIViewController, ChartViewDelegate {
         xaxis.drawGridLinesEnabled = true
         xaxis.labelPosition = .bottom
         xaxis.centerAxisLabelsEnabled = true
-        xaxis.valueFormatter = IndexAxisValueFormatter(values: ["Q1", "Q2", "Q3", "Q4"])
+        xaxis.valueFormatter = IndexAxisValueFormatter(values: ["4Q Ago", "3Q Ago", "2Q Ago", "1Q Ago"])
         xaxis.granularity = 1
         
         let leftAxisFormatter = NumberFormatter()
@@ -98,7 +98,7 @@ class TickerDetailView: UIViewController, ChartViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchFinancials = ticker?.fetchFinancials
+        fetchFinancials = ticker!.fetchFinancials
         tickerLabel.text = "\(ticker!.companyName ?? " ")(\(ticker!.tickerStr ?? " "))"
         
         //Configure lineChartView.
@@ -135,10 +135,10 @@ class TickerDetailView: UIViewController, ChartViewDelegate {
         earningsChart.width(to: earningsBarChartView)
         earningsChart.height(to: earningsBarChartView)
         earningsChart.delegate = self
-        setEarningsChart()
         
         //Set values for stats.
         setStats()
+        setEarningsChart()
     }
     
     func setStats() -> Void{
@@ -167,7 +167,8 @@ class TickerDetailView: UIViewController, ChartViewDelegate {
     func setEarningsChart() -> Void{
         //Test data.
         let quarters: [Double] = [1,2,3,4]
-        let quarterData: (actual: [Double], expected: [Double]) = ([23,12,5,12],[7,43,12,1])
+        //let quarterData: (actual: [Double], expected: [Double]) = ([23,12,5,12],[7,43,12,1])
+        let quarterData: (actual: [Double], expected: [Double]) = fetchFinancials.getEarningsData() ?? ([0,0,0,0], [0,0,0,0])
         
         var actualData: [BarChartDataEntry] = []
         var expectedData: [BarChartDataEntry] = []
@@ -184,11 +185,11 @@ class TickerDetailView: UIViewController, ChartViewDelegate {
         //Assign datasets.
         let actualDataSet = BarChartDataSet(entries: actualData, label: "Actual EPS")
         let expectedDataSet = BarChartDataSet(entries: expectedData, label: "Expected EPS")
-        let dataSets: [BarChartDataSet] = [actualDataSet, expectedDataSet]
+        let dataSets: [BarChartDataSet] = [expectedDataSet, actualDataSet]
         
         //Set colors.
-        actualDataSet.colors = [UIColor(red: 255/255, green: 0/255, blue: 0/255, alpha: 1)]
-        expectedDataSet.colors = [UIColor(red: 0/255, green: 255/255, blue: 0/255, alpha: 1)]
+        actualDataSet.colors = [UIColor(red: 39/255, green: 84/255, blue: 100/255, alpha: 1)]
+        expectedDataSet.colors = [UIColor(red: 100/255, green: 151/255, blue: 152/255, alpha: 1)]
         //Set chartdata.
         let chartData = BarChartData(dataSets: dataSets)
         
@@ -203,9 +204,7 @@ class TickerDetailView: UIViewController, ChartViewDelegate {
         chartData.barWidth = barWidth;
         earningsChart.xAxis.axisMinimum = Double(startYear)
         let gg = chartData.groupWidth(groupSpace: groupSpace, barSpace: barSpace)
-        print("Groupspace: \(gg)")
         earningsChart.xAxis.axisMaximum = Double(startYear) + gg * Double(groupCount)
-
         chartData.groupBars(fromX: Double(startYear), groupSpace: groupSpace, barSpace: barSpace)
         earningsChart.notifyDataSetChanged()
         earningsChart.data = chartData
@@ -256,7 +255,6 @@ class TickerDetailView: UIViewController, ChartViewDelegate {
         }
         setPriceData()
         stockPriceLineChart.notifyDataSetChanged()
-        print(range)
     }
     
     //MARK: - Chart Protocols
