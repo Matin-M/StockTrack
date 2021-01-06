@@ -14,9 +14,10 @@ class MenuTableView: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        overrideUserInterfaceStyle = .dark
         menuItems = ["Settings","About","Usage"]
-        tableView.backgroundColor = UIColor.gray
-        tableView.tintColor = UIColor.gray
+        tableView.backgroundColor = UIColor.black
+        tableView.tintColor = UIColor.white
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "menuCell")
 
     }

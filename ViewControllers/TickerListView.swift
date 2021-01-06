@@ -27,6 +27,7 @@ class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        overrideUserInterfaceStyle = .dark
         //Instantiate tickerModel.
         tickerModel = TickerManager(managedObject: managedObjectContext)
         
@@ -58,7 +59,7 @@ class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.tickerTable.separatorStyle = UITableViewCell.SeparatorStyle.none
         
         //Set color of tableView.
-        self.tickerTable.backgroundColor = UIColor.gray
+        //self.tickerTable.backgroundColor = UIColor.gray
         
         //Set tableview row height.
         self.tickerTable.rowHeight = 90.0

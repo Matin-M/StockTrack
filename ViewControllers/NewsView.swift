@@ -14,7 +14,7 @@ class NewsView: UIViewController, WKNavigationDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        overrideUserInterfaceStyle = .dark
         webView?.navigationDelegate = self
         if let url = URL(string: "https://www.marketwatch.com/latest-news") {
             let request = URLRequest(url: url)

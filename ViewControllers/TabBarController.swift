@@ -11,8 +11,9 @@ import UIKit
 class TabBarController: UITabBarController {
 
     override func viewDidLoad() {
-      super.viewDidLoad()
-      delegate = self
+        super.viewDidLoad()
+        overrideUserInterfaceStyle = .dark
+        delegate = self
     }
 }
 

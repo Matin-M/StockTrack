@@ -11,6 +11,7 @@ class SettingsView: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        overrideUserInterfaceStyle = .dark
 
         // Do any additional setup after loading the view.
     }

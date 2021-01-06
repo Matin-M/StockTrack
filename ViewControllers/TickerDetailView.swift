@@ -28,7 +28,7 @@ class TickerDetailView: UIViewController, ChartViewDelegate {
     lazy var stockPriceLineChart: LineChartView = {
         let chartView = LineChartView()
         //Set chart properties.
-        chartView.backgroundColor = .systemGray
+        chartView.backgroundColor = UIColor.clear
         chartView.rightAxis.enabled = false
         let yAxis = chartView.leftAxis
         yAxis.labelFont = .boldSystemFont(ofSize: CGFloat(10))
@@ -98,13 +98,14 @@ class TickerDetailView: UIViewController, ChartViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        overrideUserInterfaceStyle = .dark
         fetchFinancials = ticker!.fetchFinancials
         tickerLabel.text = "\(ticker!.companyName ?? " ")(\(ticker!.tickerStr ?? " "))"
         
         //Configure lineChartView.
         lineChartView.frame = CGRect(x: lineChartView.frame.origin.x, y: lineChartView.frame.origin.y, width: lineChartView.frame.width, height: lineChartView.frame.height)
-        lineChartView.layer.cornerRadius = 8
-        lineChartView.backgroundColor = .gray
+        lineChartView.layer.cornerRadius = 12.5
+        lineChartView.backgroundColor = UIColor.clear
         lineChartView.addSubview(stockPriceLineChart)
         stockPriceLineChart.centerInSuperview()
         stockPriceLineChart.width(to: lineChartView)
@@ -119,15 +120,19 @@ class TickerDetailView: UIViewController, ChartViewDelegate {
         }
         
         //Configure stats view.
-        statsView.backgroundColor = .gray
+        statsView.backgroundColor = UIColor.clear
         statsView.frame = CGRect(x: statsView.frame.origin.x, y: statsView.frame.origin.y, width: statsView.frame.width, height: statsView.frame.height)
-        statsView.layer.cornerRadius = 8
+        statsView.layer.cornerRadius = 12.5
+        statsView.layer.borderWidth = 2.5
+        statsView.layer.borderColor =  UIColor(red:255/255, green:255/255, blue:255/255, alpha: 1.5).cgColor
         
         //Configure earningsView.
-        earningsView.backgroundColor = .gray
+        earningsView.backgroundColor = UIColor.clear
+        earningsView.layer.cornerRadius = 12.5
+        earningsView.layer.borderWidth = 2.5
+        earningsView.layer.borderColor =  UIColor(red:255/255, green:255/255, blue:255/255, alpha: 1.5).cgColor
         earningsView.frame = CGRect(x: earningsView.frame.origin.x, y: earningsView.frame.origin.y, width: earningsView.frame.width, height: earningsView.frame.height)
-        earningsView.layer.cornerRadius = 8
-        earningsBarChartView.backgroundColor = UIColor.gray
+        earningsBarChartView.backgroundColor = UIColor.clear
         
         //Configure barChart.
         earningsBarChartView.addSubview(earningsChart)
@@ -210,7 +215,7 @@ class TickerDetailView: UIViewController, ChartViewDelegate {
         earningsChart.data = chartData
 
         //background color
-        earningsChart.backgroundColor = UIColor.systemGray
+        earningsChart.backgroundColor = UIColor.clear
 
         //chart animation
         earningsChart.animate(xAxisDuration: 1.5, yAxisDuration: 1.5, easingOption: .linear)
