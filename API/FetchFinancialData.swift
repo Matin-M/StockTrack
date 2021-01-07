@@ -18,7 +18,7 @@ class FetchFinacialData{
     var retrievedChart: String?
     
     //API key and headers.
-    let API_KEY: String = "[REDACTED]"
+    let API_KEY: String = "REDACTED"
     var headers: [String:String]
     var ticker: String?
     
@@ -203,17 +203,20 @@ class FetchFinacialData{
  
     
     func fetchStockQuote() -> Void {
-        let request = NSMutableURLRequest(url: NSURL(string: "https://yahoo-finance-low-latency.p.rapidapi.com/v6/finance/quote?symbols=\(ticker!)")! as URL, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10.0)
+        let encodedRequest: String = ticker!.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+        let request = NSMutableURLRequest(url: NSURL(string: "https://yahoo-finance-low-latency.p.rapidapi.com/v6/finance/quote?symbols=\(encodedRequest)")! as URL, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10.0)
         retrievedData = requestData(request: request)
     }
     
     func fetchStockDetails() -> Void {
-        let request = NSMutableURLRequest(url: NSURL(string: "https://yahoo-finance-low-latency.p.rapidapi.com/v11/finance/quoteSummary/\(ticker!)?modules=defaultKeyStatistics%2CassetProfile%2CsummaryDetail%2CcashflowStatementHistory%2CsecFilings%2CrecommendationTrend%2Cearnings%2CearningsTrend%2C%2CesgScores%2CcalendarEvents&region=US&lang=en")! as URL, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10.0)
+        let encodedRequest: String = ticker!.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+        let request = NSMutableURLRequest(url: NSURL(string: "https://yahoo-finance-low-latency.p.rapidapi.com/v11/finance/quoteSummary/\(encodedRequest)?modules=defaultKeyStatistics%2CassetProfile%2CsummaryDetail%2CcashflowStatementHistory%2CsecFilings%2CrecommendationTrend%2Cearnings%2CearningsTrend%2C%2CesgScores%2CcalendarEvents&region=US&lang=en")! as URL, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10.0)
         retrievedDetails = requestData(request: request)
     }
     
     func fetchStockChart(interval: String, range: String) -> Void {
-        let request = NSMutableURLRequest(url: NSURL(string: "https://yahoo-finance-low-latency.p.rapidapi.com/v8/finance/chart/\(ticker!)?interval=\(interval)&range=\(range)&region=US&lang=en")! as URL, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10.0)
+        let encodedRequest: String = ticker!.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+        let request = NSMutableURLRequest(url: NSURL(string: "https://yahoo-finance-low-latency.p.rapidapi.com/v8/finance/chart/\(encodedRequest)?interval=\(interval)&range=\(range)&region=US&lang=en")! as URL, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10.0)
         retrievedChart = requestData(request: request)
     }
     
@@ -247,7 +250,7 @@ class FetchFinacialData{
                     //Check response MIME adherance to JSON.
                     guard let mime = response?.mimeType, mime == "application/json" else {
                         print("Wrong MIME type!")
-                            throw NetworkError.OtherError
+                        throw NetworkError.OtherError
                     }
                     
                     //Deserialize JSON object: NOT WORKING
@@ -263,6 +266,7 @@ class FetchFinacialData{
                 }catch NetworkError.OtherError{
                     print("Other error occurred!")
                 }catch{
+                    
                 }
             }
             //Signal semaphore.
