@@ -1025,9 +1025,10 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rea-Sc-VQj">
                                 <rect key="frame" x="8" y="476" width="398" height="201"/>
                                 <subviews>
-                                    <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QoI-6L-BUk">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QoI-6L-BUk">
                                         <rect key="frame" x="0.0" y="26" width="398" height="167"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Europe" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vzA-yF-HrO">
                                         <rect key="frame" x="170" y="3" width="61" height="22"/>
@@ -1049,9 +1050,10 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EJh-RB-tit">
                                 <rect key="frame" x="8" y="267" width="398" height="201"/>
                                 <subviews>
-                                    <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bx5-Zf-QAA">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bx5-Zf-QAA">
                                         <rect key="frame" x="0.0" y="26" width="398" height="167"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Asia" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K7u-W2-GAf">
                                         <rect key="frame" x="182" y="3" width="38" height="22"/>
@@ -1073,9 +1075,10 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HgN-68-0MC">
                                 <rect key="frame" x="8" y="58" width="398" height="201"/>
                                 <subviews>
-                                    <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u2I-BV-8xb">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u2I-BV-8xb">
                                         <rect key="frame" x="0.0" y="26" width="398" height="167"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="US" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EEI-pk-YPl">
                                         <rect key="frame" x="188" y="3" width="25" height="22"/>
@@ -1121,6 +1124,14 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="wiy-JC-Njs"/>
+                    <connections>
+                        <outlet property="AsiaMarket" destination="EJh-RB-tit" id="mNh-BZ-V8d"/>
+                        <outlet property="AsiaMarketChart" destination="Bx5-Zf-QAA" id="07n-Eo-HZR"/>
+                        <outlet property="EUMarket" destination="Rea-Sc-VQj" id="bHo-8C-mVA"/>
+                        <outlet property="EUMarketChart" destination="QoI-6L-BUk" id="pXQ-6k-GyV"/>
+                        <outlet property="USMarket" destination="HgN-68-0MC" id="Epe-GE-Ytr"/>
+                        <outlet property="USMarketChart" destination="u2I-BV-8xb" id="Edh-X8-Hbx"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vCn-y9-uVf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
