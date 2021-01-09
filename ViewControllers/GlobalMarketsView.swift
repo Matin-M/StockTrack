@@ -31,7 +31,7 @@ class GlobalMarketsView: UIViewController, ChartViewDelegate {
     let fetchNikkei = FetchFinacialData(ticker: "^N225")
     let fetchSSE = FetchFinacialData(ticker: "000001.SS")
     //Europe
-    let fetchFTSE = FetchFinacialData(ticker: "^FCHI")
+    let fetchCAC = FetchFinacialData(ticker: "^FCHI")
     let fetchEuro = FetchFinacialData(ticker: "^N100")
     let fetchDAX = FetchFinacialData(ticker: "^GDAXI")
     
@@ -75,22 +75,22 @@ class GlobalMarketsView: UIViewController, ChartViewDelegate {
         EUChart.height(to: EUMarketChart)
         
         //Assign data.
-        let DowData = setPriceData(fetch: fetchDow, color: UIColor.red)
-        let SPData = setPriceData(fetch: fetchSP, color: UIColor.green)
-        let NasdaqData = setPriceData(fetch: fetchNasdaq, color: UIColor.blue)
+        let DowData = setPriceData(fetch: fetchDow, color: UIColor.red, fullName: "Dow Jones")
+        let SPData = setPriceData(fetch: fetchSP, color: UIColor.green, fullName: "S&P 500")
+        let NasdaqData = setPriceData(fetch: fetchNasdaq, color: UIColor.blue, fullName: "NASDAQ")
         USChart.data = LineChartData(dataSets: [NasdaqData, SPData, DowData])
         USChart.data?.setDrawValues(false)
         
-        let HSIData = setPriceData(fetch: fetchHSI, color: UIColor.red)
-        let NikkeiData = setPriceData(fetch: fetchNikkei, color: UIColor.green)
-        let SSEdData = setPriceData(fetch: fetchSSE, color: UIColor.blue)
+        let HSIData = setPriceData(fetch: fetchHSI, color: UIColor.red, fullName: "Hang Seng")
+        let NikkeiData = setPriceData(fetch: fetchNikkei, color: UIColor.green, fullName: "Nikkei 225")
+        let SSEdData = setPriceData(fetch: fetchSSE, color: UIColor.blue, fullName: "Shanghai SE")
         AsiaChart.data = LineChartData(dataSets: [HSIData, NikkeiData, SSEdData])
         AsiaChart.data?.setDrawValues(false)
         
-        let FTSEData = setPriceData(fetch: fetchFTSE, color: UIColor.red)
-        let EuroData = setPriceData(fetch: fetchEuro, color: UIColor.green)
-        let DaxData = setPriceData(fetch: fetchDAX, color: UIColor.blue)
-        EUChart.data = LineChartData(dataSets: [FTSEData, EuroData, DaxData])
+        let CACData = setPriceData(fetch: fetchCAC, color: UIColor.red, fullName: "CAC40")
+        let EuroData = setPriceData(fetch: fetchEuro, color: UIColor.green, fullName: "Euronext 100")
+        let DaxData = setPriceData(fetch: fetchDAX, color: UIColor.blue, fullName: "DAX")
+        EUChart.data = LineChartData(dataSets: [CACData, EuroData, DaxData])
         EUChart.data?.setDrawValues(false)
         
     }
@@ -119,25 +119,29 @@ class GlobalMarketsView: UIViewController, ChartViewDelegate {
         chartView.xAxis.axisLineColor = .white
         chartView.animate(xAxisDuration: 2)
         chartView.drawBordersEnabled = false
+        chartView.leftAxis.drawLabelsEnabled = false
         chartView.setScaleEnabled(true)
         return chartView
     }
     
-    func setPriceData(fetch: FetchFinacialData, color: UIColor) -> LineChartDataSet{
+    func setPriceData(fetch: FetchFinacialData, color: UIColor, fullName: String) -> LineChartDataSet{
         //Populate dataset.
         fetch.retrievedChart = ""
         fetch.fetchStockChart(interval: "1d", range: "3mo")
+        
         var min: Double = 0
         var max: Double = 0
         var priceData: [ChartDataEntry] = []
         let chartData: (x: [Double],y: [Double]) = fetch.getChartData()!
         min = chartData.y.min()!
         max = chartData.y.max()!
+        //Assign data.
         for(x, y) in zip(chartData.x, chartData.y){
             let normalized: Double = (y-min)/(max-min)
             priceData.append(ChartDataEntry(x: x, y: normalized))
         }
-        let dataSet = LineChartDataSet(entries: priceData, label: fetch.ticker!)
+        //Configure dataset.
+        let dataSet = LineChartDataSet(entries: priceData, label: fullName)
         dataSet.drawCirclesEnabled = false
         dataSet.mode = .cubicBezier
         dataSet.lineWidth = 2
