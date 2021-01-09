@@ -51,7 +51,7 @@ class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSour
         }else{
             tickerTable.addSubview(refreshControl)
         }
-        refreshControl.tintColor = UIColor(red:0.17, green:0.17, blue:0.17, alpha:1.0)
+        refreshControl.tintColor = UIColor(red:1.0, green:1.0, blue:1.0, alpha:1.0)
         refreshControl.attributedTitle = NSAttributedString(string: "Fetching Data...")
         refreshControl.addTarget(self, action: #selector(refreshTickerData(_:)), for: .valueChanged)
         
