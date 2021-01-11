@@ -29,7 +29,7 @@
 		9E48117425A03FBB00692813 /* APIErrorDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E48117325A03FBB00692813 /* APIErrorDelegate.swift */; };
 		9E48118425A3E41000692813 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E48118325A3E41000692813 /* TabBarController.swift */; };
 		9E48119525A7A01B00692813 /* GlobalMarketsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E48119425A7A01B00692813 /* GlobalMarketsView.swift */; };
-		9E880AB425AA4EA2008DB84A /* UsageDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E880AB325AA4EA2008DB84A /* UsageDelegate.swift */; };
+		9E880ABE25AA52F2008DB84A /* APIUsageDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E880ABD25AA52F2008DB84A /* APIUsageDelegate.swift */; };
 		9EF3BDFC2581DA830074A217 /* TickerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF3BDFB2581DA830074A217 /* TickerManager.swift */; };
 		9EF3BE092581E3720074A217 /* TickerLocal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF3BE082581E3720074A217 /* TickerLocal.swift */; };
 /* End PBXBuildFile section */
@@ -58,7 +58,7 @@
 		9E48117325A03FBB00692813 /* APIErrorDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIErrorDelegate.swift; sourceTree = "<group>"; };
 		9E48118325A3E41000692813 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		9E48119425A7A01B00692813 /* GlobalMarketsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalMarketsView.swift; sourceTree = "<group>"; };
-		9E880AB325AA4EA2008DB84A /* UsageDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsageDelegate.swift; sourceTree = "<group>"; };
+		9E880ABD25AA52F2008DB84A /* APIUsageDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIUsageDelegate.swift; sourceTree = "<group>"; };
 		9EF3BDFB2581DA830074A217 /* TickerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerManager.swift; sourceTree = "<group>"; };
 		9EF3BE082581E3720074A217 /* TickerLocal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerLocal.swift; sourceTree = "<group>"; };
 		B908F91E03C5DCC460BF74B1 /* Pods_StockTrack.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StockTrack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -141,9 +141,9 @@
 		9E210D032585ACAD00040B6D /* API */ = {
 			isa = PBXGroup;
 			children = (
-				9E880AB325AA4EA2008DB84A /* UsageDelegate.swift */,
 				9E210D042585ACE300040B6D /* FetchFinancialData.swift */,
 				9E48117325A03FBB00692813 /* APIErrorDelegate.swift */,
+				9E880ABD25AA52F2008DB84A /* APIUsageDelegate.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -310,8 +310,8 @@
 				9E48119525A7A01B00692813 /* GlobalMarketsView.swift in Sources */,
 				9E37AF7E25849CD700FB9AEB /* TickerDetailView.swift in Sources */,
 				9EF3BDFC2581DA830074A217 /* TickerManager.swift in Sources */,
-				9E880AB425AA4EA2008DB84A /* UsageDelegate.swift in Sources */,
 				9E0929DD2581D6C5005004A0 /* TickerCell.swift in Sources */,
+				9E880ABE25AA52F2008DB84A /* APIUsageDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

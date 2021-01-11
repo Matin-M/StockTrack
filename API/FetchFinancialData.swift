@@ -9,8 +9,9 @@ import Foundation
 
 class FetchFinacialData{
     
-    //Delegate.
-    var delegate: APIErrorDelegate?
+    //Delegates.
+    var errorDelegate: APIErrorDelegate?
+    var usageDelegate: APIUsageDelegate?
     
     //Retrieved data.
     var retrievedData: String?
@@ -24,7 +25,9 @@ class FetchFinacialData{
     
     //Database selector.
     enum Databases: CaseIterable {
-        case data, details, chart
+        case data
+        case details
+        case chart
     }
     
     //API Errors.
@@ -206,18 +209,24 @@ class FetchFinacialData{
         let encodedRequest: String = ticker!.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
         let request = NSMutableURLRequest(url: NSURL(string: "https://yahoo-finance-low-latency.p.rapidapi.com/v6/finance/quote?symbols=\(encodedRequest)")! as URL, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10.0)
         retrievedData = requestData(request: request)
+        usageDelegate?.quoteRequeast()
+        usageDelegate?.totalRequest()
     }
     
     func fetchStockDetails() -> Void {
         let encodedRequest: String = ticker!.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
         let request = NSMutableURLRequest(url: NSURL(string: "https://yahoo-finance-low-latency.p.rapidapi.com/v11/finance/quoteSummary/\(encodedRequest)?modules=defaultKeyStatistics%2CassetProfile%2CsummaryDetail%2CcashflowStatementHistory%2CsecFilings%2CrecommendationTrend%2Cearnings%2CearningsTrend%2C%2CesgScores%2CcalendarEvents&region=US&lang=en")! as URL, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10.0)
         retrievedDetails = requestData(request: request)
+        usageDelegate?.detailRequest()
+        usageDelegate?.totalRequest()
     }
     
     func fetchStockChart(interval: String, range: String) -> Void {
         let encodedRequest: String = ticker!.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
         let request = NSMutableURLRequest(url: NSURL(string: "https://yahoo-finance-low-latency.p.rapidapi.com/v8/finance/chart/\(encodedRequest)?interval=\(interval)&range=\(range)&region=US&lang=en")! as URL, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10.0)
         retrievedChart = requestData(request: request)
+        usageDelegate?.chartRequest()
+        usageDelegate?.totalRequest()
     }
     
     //Make a RESTful API request to yahoo finance.
@@ -283,7 +292,7 @@ class FetchFinacialData{
     func handleClientError(error: Optional<Any>) -> Void{
         print("A client error occurred!")
         DispatchQueue.main.async{
-            self.delegate?.clientError()
+            self.errorDelegate?.clientError()
         }
         
     }
@@ -291,7 +300,7 @@ class FetchFinacialData{
     func handleServerError(response: HTTPURLResponse) -> Void{
         print("A server error occurred!")
         DispatchQueue.main.async{
-            self.delegate?.serverError()
+            self.errorDelegate?.serverError()
         }
     }
     

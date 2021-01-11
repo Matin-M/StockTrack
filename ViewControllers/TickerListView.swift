@@ -9,7 +9,7 @@ import UIKit
 import CoreData
 import SideMenu
 
-class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSource, MenuControllerDelegate, APIErrorDelegate{
+class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSource, MenuControllerDelegate, APIErrorDelegate, APIUsageDelegate{
     
     //CoreData and Model objects.
     var tickerModel: TickerManager?
@@ -21,15 +21,21 @@ class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSour
     var refreshControl: UIRefreshControl!
     
     //Menu Views.
-    var settingsView: UIViewController!
-    var aboutView: UIViewController!
-    var usageView: UIViewController!
+    var settingsView: SettingsView!
+    var aboutView: AboutView!
+    var usageView: UsageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         overrideUserInterfaceStyle = .dark
         //Instantiate tickerModel.
         tickerModel = TickerManager(managedObject: managedObjectContext)
+        
+        //Declare Menu Subviews.
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        settingsView = storyboard.instantiateViewController(withIdentifier: "SettingsView") as? SettingsView
+        usageView = storyboard.instantiateViewController(withIdentifier: "UsageView") as? UsageView
+        aboutView = storyboard.instantiateViewController(withIdentifier: "AboutView") as? AboutView
         
         //Configure menu View Controller.
         let sideMenuObject = MenuTableView()
@@ -58,27 +64,53 @@ class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSour
         //Remove TableLines.
         self.tickerTable.separatorStyle = UITableViewCell.SeparatorStyle.none
         
-        //Set color of tableView.
-        //self.tickerTable.backgroundColor = UIColor.gray
-        
         //Set tableview row height.
         self.tickerTable.rowHeight = 90.0
         
         //Update tickers with data upon open.
         refreshTickers()
-        
-        //Declare Menu Subviews.
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        settingsView = storyboard.instantiateViewController(withIdentifier: "SettingsView")
-        usageView = storyboard.instantiateViewController(withIdentifier: "UsageView")
-        aboutView = storyboard.instantiateViewController(withIdentifier: "AboutView")
     }
     
+    //Refresh controller handler.
     @objc private func refreshTickerData(_ sender: Any) {
         refreshTickers()
         tickerTable.reloadData()
         refreshControl.endRefreshing()
     }
+    
+    func totalRequest() {
+        if usageView.totalRequests != nil{
+            usageView.incrementStat(whichStat: UsageView.stat.total, inc: 1)
+            usageView.setStats()
+        }else{
+            usageView.incrementStat(whichStat: UsageView.stat.total, inc: 1)
+        }
+        
+    }
+    
+    func chartRequest() {
+        if usageView.totalRequests != nil{
+            usageView.incrementStat(whichStat: UsageView.stat.chart, inc: 1)
+            usageView.setStats()
+        }else{
+            usageView.incrementStat(whichStat: UsageView.stat.chart, inc: 1)
+        }    }
+    
+    func detailRequest() {
+        if usageView.totalRequests != nil{
+            usageView.incrementStat(whichStat: UsageView.stat.detail, inc: 1)
+            usageView.setStats()
+        }else{
+            usageView.incrementStat(whichStat: UsageView.stat.detail, inc: 1)
+        }    }
+    
+    func quoteRequeast() {
+        if usageView.totalRequests != nil{
+            usageView.incrementStat(whichStat: UsageView.stat.quote, inc: 1)
+            usageView.setStats()
+        }else{
+            usageView.incrementStat(whichStat: UsageView.stat.quote, inc: 1)
+        }    }
     
     //Handle sidemenu interactions.
     @IBAction func didTapMenu(_ sender: Any) {
@@ -206,7 +238,8 @@ class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSour
             let addedTickerObj = tickerModel!.addTickerObject(tickerStr: firstTextField.text!)
             let fetch = FetchFinacialData(ticker: addedTickerObj.tickerStr!)
             addedTickerObj.fetchFinancials = fetch
-            addedTickerObj.fetchFinancials.delegate = self
+            addedTickerObj.fetchFinancials.errorDelegate = self
+            addedTickerObj.fetchFinancials.usageDelegate = self
             fetch.fetchStockQuote()
             
             if((fetch.extractData(data: FetchFinacialData.Databases.data, toFind: "result", delimiter: ",", skipAmnt: 2)) == "[]"){
@@ -238,8 +271,10 @@ class TickerListView: UIViewController, UITableViewDelegate, UITableViewDataSour
             //Set stats.
             let fetch = FetchFinacialData(ticker: tickerFromList.tickerStr!)
             tickerFromList.fetchFinancials = fetch
-            tickerFromList.fetchFinancials.delegate = self
+            tickerFromList.fetchFinancials.errorDelegate = self
+            tickerFromList.fetchFinancials.usageDelegate = self
             fetch.fetchStockQuote()
+            //Assign properties.
             tickerFromList.percentChange = fetch.getQuoteData(toFind: "regularMarketChangePercent")
             tickerFromList.afterHoursChange = fetch.getQuoteData(toFind: "postMarketChangePercent")
             tickerFromList.companyName = fetch.getQuoteData(toFind: "displayName")?.replacingOccurrences(of: "\"", with: "", options: NSString.CompareOptions.literal, range: nil)
