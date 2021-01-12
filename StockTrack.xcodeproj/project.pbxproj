@@ -19,7 +19,6 @@
 		9E210D052585ACE300040B6D /* FetchFinancialData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E210D042585ACE300040B6D /* FetchFinancialData.swift */; };
 		9E37AF5D2582D76200FB9AEB /* TickerCoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9E37AF5B2582D76200FB9AEB /* TickerCoreData.xcdatamodeld */; };
 		9E37AF6B2583156E00FB9AEB /* TickerStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E37AF6A2583156E00FB9AEB /* TickerStore.swift */; };
-		9E37AF7625834D1800FB9AEB /* RoundedBorder.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E37AF7525834D1800FB9AEB /* RoundedBorder.png */; };
 		9E37AF7B2584958800FB9AEB /* NewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E37AF7A2584958800FB9AEB /* NewsView.swift */; };
 		9E37AF7E25849CD700FB9AEB /* TickerDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E37AF7D25849CD700FB9AEB /* TickerDetailView.swift */; };
 		9E48115E259EB4E600692813 /* MenuControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E48115D259EB4E600692813 /* MenuControllerDelegate.swift */; };
@@ -48,7 +47,6 @@
 		9E210D042585ACE300040B6D /* FetchFinancialData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchFinancialData.swift; sourceTree = "<group>"; };
 		9E37AF5C2582D76200FB9AEB /* TickerCoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TickerCoreData.xcdatamodel; sourceTree = "<group>"; };
 		9E37AF6A2583156E00FB9AEB /* TickerStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerStore.swift; sourceTree = "<group>"; };
-		9E37AF7525834D1800FB9AEB /* RoundedBorder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RoundedBorder.png; sourceTree = "<group>"; };
 		9E37AF7A2584958800FB9AEB /* NewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsView.swift; sourceTree = "<group>"; };
 		9E37AF7D25849CD700FB9AEB /* TickerDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerDetailView.swift; sourceTree = "<group>"; };
 		9E48115D259EB4E600692813 /* MenuControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuControllerDelegate.swift; sourceTree = "<group>"; };
@@ -101,7 +99,6 @@
 				9E738CFF259A7A1D00DD9F9F /* ViewControllers */,
 				9E210D032585ACAD00040B6D /* API */,
 				9E37AF6F258338E900FB9AEB /* CoreData */,
-				9E0929DF2581D79F005004A0 /* Images */,
 				9E0929BB2581CFCB005004A0 /* StockTrack */,
 				9E0929BA2581CFCB005004A0 /* Products */,
 				7C8CE90D3BE3C883056FF0CC /* Pods */,
@@ -128,14 +125,6 @@
 				9E0929CD2581CFCE005004A0 /* Info.plist */,
 			);
 			path = StockTrack;
-			sourceTree = "<group>";
-		};
-		9E0929DF2581D79F005004A0 /* Images */ = {
-			isa = PBXGroup;
-			children = (
-				9E37AF7525834D1800FB9AEB /* RoundedBorder.png */,
-			);
-			path = Images;
 			sourceTree = "<group>";
 		};
 		9E210D032585ACAD00040B6D /* API */ = {
@@ -239,7 +228,6 @@
 				9E0929CC2581CFCE005004A0 /* LaunchScreen.storyboard in Resources */,
 				9E0929C92581CFCE005004A0 /* Assets.xcassets in Resources */,
 				9E0929C42581CFCB005004A0 /* Main.storyboard in Resources */,
-				9E37AF7625834D1800FB9AEB /* RoundedBorder.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
